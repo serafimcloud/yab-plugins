@@ -1,0 +1,9 @@
+{
+  "name": "Gmail without Gemini",
+  "intent": "In Gmail, hide Gemini: the Ask Gemini button at the top, the Gemini side panel, the AI Inbox entry in the menu, the summary cards and Summarize buttons on messages, and Help me write in the composer. Also hide upsell strips for more storage or Gemini trials. Search, the inbox, labels, compose and replies all stay.",
+  "host": "mail.google.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://mail.google.com/mail/u/0/#inbox",
+  "added": "2026-10-04"
+}

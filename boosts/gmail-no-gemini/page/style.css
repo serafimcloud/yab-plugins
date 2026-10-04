@@ -1,0 +1,24 @@
+/* The Ask Gemini button in the top bar, with its slot. */
+div:has(> span > button[aria-label="Ask Gemini"]),
+button[aria-label="Ask Gemini"],
+
+/* The Gemini side panel and the AI Inbox view in the left menu. */
+div[aria-label="Gemini"],
+div[role="complementary"][aria-label*="Gemini"],
+div[data-tooltip="AI Inbox"],
+div:has(> a[href$="#aiinbox"]),
+
+/* Summary cards and buttons in a message, and Help me write in the composer. */
+[aria-label^="Summarize this" i],
+[aria-label="Summary by Gemini" i],
+[data-tooltip^="Summarize this" i],
+[role="button"][aria-label^="Help me write"],
+[role="button"][data-tooltip^="Help me write"],
+
+/* Upsell strips: Google One storage offers and Gemini trials. */
+a[href*="one.google.com/about/plans"],
+a[href*="one.google.com/storage"],
+[aria-label^="Try Gemini" i],
+[aria-label*="Google One" i][role="button"] {
+  display: none !important;
+}
