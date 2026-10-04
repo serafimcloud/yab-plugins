@@ -139,16 +139,23 @@ function signInVisible() {
 // Never accept tracking: only buttons that reject or keep the necessary ones.
 const REJECT = /^(?:(?:reject|decline|refuse)(?: all| optional| non-essential| additional)?(?: cookies)?|(?:use |allow )?(?:only )?(?:necessary|essential|required)(?: cookies)? only|(?:use |allow )?only (?:allow )?(?:necessary|essential|required)(?: cookies)?)$/i;
 
+// Locator.count() takes no timeout and never settles in some ad frames, so
+// every frame gets a bounded look.
+const bounded = (promise, ms, fallback) => Promise.race([promise.catch(() => fallback), new Promise(resolve => setTimeout(() => resolve(fallback), ms))]);
+
 async function dismissConsent(page) {
   for (let round = 0; round < 2; round++) {
     let clicked = false;
     for (const frame of page.frames()) {
+      // Frames without a URL (ad slots written by script) hold no consent banner.
+      const url = frame.url();
+      if (frame !== page.mainFrame() && (!url || url === 'about:blank' || frame.isDetached())) continue;
       try {
         const buttons = frame.locator('button, [role="button"], input[type="button"], input[type="submit"], a[role="button"]');
-        const count = Math.min(await buttons.count(), 300);
+        const count = Math.min(await bounded(buttons.count(), 2000, 0), 300);
         for (let i = 0; i < count && !clicked; i++) {
           const b = buttons.nth(i);
-          const label = ((await b.innerText({ timeout: 500 }).catch(() => '')) || (await b.getAttribute('aria-label').catch(() => '')) || (await b.getAttribute('value').catch(() => '')) || '').trim().replace(/\s+/g, ' ');
+          const label = ((await b.innerText({ timeout: 500 }).catch(() => '')) || (await b.getAttribute('aria-label', { timeout: 500 }).catch(() => '')) || (await b.getAttribute('value', { timeout: 500 }).catch(() => '')) || '').trim().replace(/\s+/g, ' ');
           if (REJECT.test(label) && await b.isVisible().catch(() => false)) {
             await b.click({ timeout: 3000 }).catch(() => {});
             clicked = true;
@@ -286,9 +293,14 @@ async function checkOne(browser, id) {
   return result;
 }
 
-const withTimeout = (promise, ms, id) => Promise.race([promise, new Promise(resolve => setTimeout(() => resolve({
-  state: 'unchecked', at: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'), note: `check timed out after ${ms / 1000} s`, before: null, after: null, pictures: {},
-}), ms))]);
+// The timer is cleared when the check finishes, or it keeps the process alive.
+const withTimeout = (promise, ms, id) => {
+  let timer;
+  const late = new Promise(resolve => { timer = setTimeout(() => resolve({
+    state: 'unchecked', at: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'), note: `check timed out after ${ms / 1000} s`, before: null, after: null, pictures: {},
+  }), ms); });
+  return Promise.race([promise, late]).finally(() => clearTimeout(timer));
+};
 
 async function main() {
   const ids = selectedIds();
