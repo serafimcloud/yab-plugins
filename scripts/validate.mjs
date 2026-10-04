@@ -136,7 +136,7 @@ export function validate(id) {
 
 // ---- second review ----------------------------------------------------------
 
-const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20 });
+const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20, stdio: ['ignore', 'pipe', 'ignore'] });
 const show = (rev, path) => { try { return git('show', `${rev}:${path}`); } catch { return null; } };
 const json = text => { try { return JSON.parse(text); } catch { return null; } };
 const sitesAt = (rev, id) => { try { return parseBoostMd(show(rev, `boosts/${id}/BOOST.md`) ?? '').sites; } catch { return []; } };
