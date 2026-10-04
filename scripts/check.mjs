@@ -14,14 +14,14 @@
 // checked in this run are kept from the previous results.json.
 import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { webkit } from 'playwright';
 import { ROOT, boostIds, readBoost } from './lib/boosts.mjs';
 
 const args = process.argv.slice(2);
 const option = (name, fallback) => { const i = args.indexOf(name); if (i < 0) return fallback; const [, value] = args.splice(i, 2); return value; };
 const flag = name => { const i = args.indexOf(name); if (i < 0) return false; args.splice(i, 1); return true; };
-const OUT = join(ROOT, option('--out', 'out'));
+const OUT = resolve(ROOT, option('--out', 'out'));
 const JOBS = Number(option('--jobs', '4'));
 const CHANGED = option('--changed', null);
 const HEADED = flag('--headed');

@@ -16,13 +16,13 @@
 // says "unchecked" when the boost never passed.
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname, extname, join } from 'node:path';
+import { dirname, extname, join, resolve } from 'node:path';
 import { ROOT, boostIds, canonical, displayHost, envelopeOf, readBoost, rightsOf, rungOf } from './lib/boosts.mjs';
 
 const args = process.argv.slice(2);
 const option = (name, fallback) => { const i = args.indexOf(name); return i < 0 ? fallback : args[i + 1]; };
-const OUT = join(ROOT, option('--out', 'out'));
-const HISTORY = join(ROOT, option('--history', 'state/history.json'));
+const OUT = resolve(ROOT, option('--out', 'out'));
+const HISTORY = resolve(ROOT, option('--history', 'state/history.json'));
 const KEEP_DAYS = 30;
 
 const iso = date => date.toISOString().replace(/\.\d{3}Z$/, 'Z');
