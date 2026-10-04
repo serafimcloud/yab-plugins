@@ -6,6 +6,8 @@ preview: https://www.google.com/search?q=how+long+to+boil+an+egg&hl=en
 checks:
   - on /search: none of #Odp5De:has([data-subtree='mfc']), [data-subtree='mfc'], a[href*='udm=50']
   - on /search: some of #rso
+  - on /: none of button[jscontroller='jNZDL']
+  - on /: some of textarea[name='q']
 ---
 
 On Google Search, hide the AI Overview and the AI Mode prompts so the results start with the web links.
