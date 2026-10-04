@@ -1,0 +1,9 @@
+{
+  "name": "Just the recipe",
+  "intent": "On Allrecipes, keep the recipe and hide the ads, the video that follows me down the page and the notification prompt.",
+  "host": "allrecipes.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/",
+  "added": "2026-10-04"
+}

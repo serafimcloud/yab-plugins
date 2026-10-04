@@ -1,0 +1,9 @@
+{
+  "name": "Plain search results",
+  "intent": "In YouTube search, show only the videos and channels I searched for: hide shelves like People also watched, For you, Latest from a channel, Shorts and ads.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.youtube.com/results?search_query=lofi",
+  "added": "2026-10-04"
+}

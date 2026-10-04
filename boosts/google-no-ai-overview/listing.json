@@ -1,0 +1,9 @@
+{
+  "name": "Search without AI Overview",
+  "intent": "On Google Search, hide the AI Overview and the AI Mode prompts so the results start with the web links.",
+  "host": "google.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.google.com/search?q=how+long+to+boil+an+egg&hl=en",
+  "added": "2026-10-04"
+}

@@ -1,0 +1,5 @@
+shreddit-app[pagetype='post_detail'] #right-sidebar-container,
+shreddit-comments-page-ad,
+shreddit-ad-post { display: none !important; }
+
+shreddit-app[pagetype='post_detail'] .main-container { grid-template-columns: minmax(0, 1fr) !important; }

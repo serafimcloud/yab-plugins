@@ -1,0 +1,9 @@
+{
+  "name": "Denser video grid",
+  "intent": "On YouTube, show more, smaller videos in each row of the home page and channel video grids instead of three big ones.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.youtube.com/@veritasium/videos",
+  "added": "2026-10-04"
+}

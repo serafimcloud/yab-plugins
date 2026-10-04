@@ -1,0 +1,9 @@
+{
+  "name": "Wide Reddit threads",
+  "intent": "On a Reddit post, give the post and its comments the full width: hide the right rail with related posts and ads, and the ads between comments.",
+  "host": "reddit.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.reddit.com/r/AskReddit/comments/1wsoqrp/whats_a_fact_that_could_save_your_life/",
+  "added": "2026-10-04"
+}

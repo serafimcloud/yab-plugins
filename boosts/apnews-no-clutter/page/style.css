@@ -1,0 +1,6 @@
+.LeaderBoardAd-Web,
+.Advertisement,
+[id^='primis_player'],
+iframe.dianomi-parent-iframe,
+[class^='ap-newsletter-embed'],
+.bx-slab { display: none !important; }

@@ -1,0 +1,10 @@
+[source='xpromo'],
+#left-sidebar-container:has([source='xpromo']),
+auth-flow-google-one-tap-prompt,
+#credential_picker_container { display: none !important; }
+
+.grid-container:has(> #left-sidebar-container [source='xpromo']) {
+  grid-template-columns: minmax(0, 965px) !important;
+  justify-content: center;
+}
+.grid-container:has(> #left-sidebar-container [source='xpromo']) > #subgrid-container { grid-column: 1 !important; }

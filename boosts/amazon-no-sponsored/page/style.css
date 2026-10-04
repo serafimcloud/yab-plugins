@@ -1,0 +1,5 @@
+.s-main-slot > .AdHolder,
+.s-main-slot > div:has(.puis-sponsored-label-text),
+.s-main-slot > div:has(.s-widget-sponsored-label-text),
+.s-main-slot > div:has([aria-label='View Sponsored information or leave ad feedback']),
+.s-main-slot > div:has([cel_widget_id^='sb-'], [cel_widget_id*='loom-desktop'], .sb-desktop) { display: none !important; }

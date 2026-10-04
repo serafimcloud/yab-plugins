@@ -1,0 +1,9 @@
+{
+  "name": "Hide sponsored results",
+  "intent": "Hide sponsored products and sponsored shelves in Amazon search results, keep the real results.",
+  "host": "amazon.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.amazon.com/s?k=usb+c+cable",
+  "added": "2026-10-04"
+}

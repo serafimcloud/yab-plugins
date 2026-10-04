@@ -1,0 +1,6 @@
+[id^='mm-ads-'],
+[id^='leaderboard'],
+[id^='native-fluid-placeholder'],
+[id^='infinite-ad-unit'],
+[id^='push-sdk-prompt'],
+.jwplayer.jw-flag-floating .jw-wrapper { display: none !important; }

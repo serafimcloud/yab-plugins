@@ -1,0 +1,9 @@
+{
+  "name": "Quiet AP articles",
+  "intent": "On AP News articles, keep the story and its photos and hide the ads, the video that floats in the corner, paid content blocks and newsletter sign-up boxes.",
+  "host": "apnews.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://apnews.com/article/hemp-marijuana-cannabis-thc-mcconnell-a6f2a02b40c7c5d33d99c84f3221e93f",
+  "added": "2026-10-04"
+}

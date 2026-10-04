@@ -1,0 +1,9 @@
+{
+  "name": "No Reddit app nags",
+  "intent": "On Reddit when I'm signed out, hide the join and open-in-app banners and the Google sign-in prompt, and give the space back to the post.",
+  "host": "reddit.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.reddit.com/r/AskReddit/comments/1wsoqrp/whats_a_fact_that_could_save_your_life/",
+  "added": "2026-10-04"
+}
