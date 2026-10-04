@@ -1,0 +1,9 @@
+{
+  "name": "Show media without blur",
+  "intent": "On X, show photos and videos in posts as they are, without the blur X puts over media it marks as possibly sensitive, so I don't have to click Show on each one. Only the blur goes; the posts, their text and the rest of the page stay as they are.",
+  "host": "x.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://x.com/home",
+  "added": "2026-10-04"
+}

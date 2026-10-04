@@ -1,0 +1,30 @@
+/* Grok: the nav entry, the floating drawer, the button on every post
+   ("Explain this post") and any Grok button in the composer. */
+a[href="/i/grok"],
+a[href^="/i/grok/"],
+a[href^="/i/grok?"],
+[data-testid="GrokDrawer"],
+article [aria-label*="Grok"],
+[data-testid="toolBar"] [aria-label*="Grok"],
+[role="menu"] a[href^="/i/grok"],
+
+/* Premium, Verified Orgs (Business), Communities and Jobs in the nav and the More menu. */
+a[data-testid="premium-hub-tab"],
+a[href="/i/premium"],
+a[href^="/i/premium_sign_up"],
+a[href="/i/verified-orgs-signup"],
+a[href^="/i/premium-business"],
+header nav a[href$="/communities"],
+[role="menu"] a[href$="/communities"],
+header nav a[href="/jobs"],
+[role="menu"] a[href="/jobs"],
+a[href^="/i/jobs"],
+
+/* Premium upsell boxes. */
+aside[aria-label="Subscribe to Premium"],
+[data-testid="sidebarColumn"] div:has(> aside[aria-label="Subscribe to Premium"]),
+[data-testid="super-upsell-UpsellCardRenderProperties"],
+[data-testid="verified_profile_upsell"],
+[data-testid="inlinePrompt"]:has(a[href^="/i/premium"]) {
+  display: none !important;
+}

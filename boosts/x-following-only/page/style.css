@@ -1,0 +1,4 @@
+/* The first tab of the home timeline is For you; Following and pinned lists stay. */
+[aria-label="Home timeline"] [data-testid="ScrollSnap-List"] > [role="presentation"]:first-child {
+  display: none !important;
+}

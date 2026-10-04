@@ -1,0 +1,11 @@
+/* Media in posts is drawn without the blur X puts over potentially sensitive
+   photos and videos. Only filters inside a post's media are reset. */
+article [data-testid="tweetPhoto"],
+article [data-testid="tweetPhoto"] *,
+article [data-testid="videoComponent"],
+article [data-testid="videoComponent"] *,
+article [data-testid="videoPlayer"],
+article [data-testid="videoPlayer"] * {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
