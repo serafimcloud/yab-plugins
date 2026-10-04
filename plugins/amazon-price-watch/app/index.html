@@ -1,0 +1,16 @@
+<meta charset="utf-8">
+<title>Amazon Price Watch</title>
+<link rel="stylesheet" href="style.css">
+<main>
+  <h1>Amazon Price Watch</h1>
+  <p class="sub">Checks every hour. Yab tells you when a price falls 10% or a product is back in stock.</p>
+  <p class="note" id="note" hidden></p>
+  <form id="add">
+    <input id="field" placeholder="Amazon link or ASIN" autocomplete="off" spellcheck="false" aria-label="Amazon link or ASIN">
+    <button type="submit">Watch</button>
+  </form>
+  <p class="hint" id="hint"></p>
+  <ul id="list"></ul>
+  <p class="empty" id="empty" hidden>Nothing watched yet. Paste a product link above, or use Watch This Product on an Amazon page.</p>
+</main>
+<script src="app.js"></script>

@@ -1,0 +1,16 @@
+{
+  "commands": [
+    {
+      "id": "watch-this-product",
+      "name": "Watch This Product",
+      "prompt": "The current tab is an Amazon product page. Find its ASIN: the 10 letters and digits after /dp/ or /gp/product/ in the address. Open yab://amazon-price-watch.boost/app/index.html?add=<ASIN> so Amazon Price Watch adds it, then say which product is now watched. If the tab is not an Amazon product page, say so and stop."
+    }
+  ],
+  "actions": [
+    {
+      "id": "deals",
+      "name": "Today's Deals",
+      "url": "https://www.amazon.com/deals"
+    }
+  ]
+}
