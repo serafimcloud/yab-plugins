@@ -1,0 +1,9 @@
+{
+  "name": "Wide YouTube player",
+  "intent": "On YouTube, always show the video player wide, across the whole page, instead of in a narrow column next to the suggestions. The title, description and comments sit under the player and the next videos follow below them.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+  "added": "2026-10-04"
+}

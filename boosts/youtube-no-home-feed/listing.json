@@ -1,0 +1,9 @@
+{
+  "name": "YouTube home without recommendations",
+  "intent": "On YouTube, open to a calm home page: no grid of recommended videos, no Shorts shelves and no topic chips on Home. Search, the side menu, Subscriptions, my channels, history and playlists all stay, so I go to what I came for.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.youtube.com/",
+  "added": "2026-10-04"
+}

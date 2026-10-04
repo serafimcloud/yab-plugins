@@ -1,0 +1,19 @@
+/* AI: the Ask button under a video, its chat panel, the Ask section and the
+   AI summary in the description. */
+yt-button-view-model:has(.you-chat-entrypoint-button),
+.you-chat-entrypoint-button,
+yt-video-description-youchat-section-view-model,
+ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"],
+ytd-expandable-metadata-renderer:has(video-summary-content-view-model),
+
+/* Premium upsells: paid quality options such as 1080p Premium, the Premium
+   entry in the side menu, and promo bars and banners. */
+.ytp-menuitem:has(.ytp-premium-label),
+ytd-guide-entry-renderer:has(a[href^="/premium"]),
+ytd-mini-guide-entry-renderer:has(a[href^="/premium"]),
+ytd-mealbar-promo-renderer,
+ytd-banner-promo-renderer,
+ytd-statement-banner-renderer,
+ytd-primetime-promo-renderer {
+  display: none !important;
+}

@@ -1,0 +1,23 @@
+/* The default watch page in one column: the player as wide as the window
+   allows (YouTube still keeps it within the window's height), the title,
+   description and comments under it, then the next videos. Theater and
+   full screen stay as YouTube draws them. */
+ytd-watch-flexy[is-two-columns_]:not([theater]):not([fullscreen]) #columns.ytd-watch-flexy {
+  flex-direction: column !important;
+}
+ytd-watch-flexy[is-two-columns_]:not([theater]):not([fullscreen]) #primary.ytd-watch-flexy {
+  max-width: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  padding-right: 24px !important;
+}
+ytd-watch-flexy[is-two-columns_]:not([theater]):not([fullscreen]) #secondary.ytd-watch-flexy {
+  width: auto !important;
+  max-width: none !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+ytd-watch-flexy[is-two-columns_]:not([theater]):not([fullscreen]) #player-container-outer.ytd-watch-flexy {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
