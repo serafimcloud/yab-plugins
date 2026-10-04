@@ -1,0 +1,9 @@
+{
+  "name": "Real Dates",
+  "intent": "Show the actual date next to relative times like \"3 weeks ago\" on YouTube and Reddit.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.reddit.com/r/programming/",
+  "added": "2026-10-04"
+}

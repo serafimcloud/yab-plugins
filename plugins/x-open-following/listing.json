@@ -1,0 +1,9 @@
+{
+  "name": "Following First",
+  "intent": "When I open X's home timeline, show the Following tab instead of For you. If I switch back to For you, leave it.",
+  "host": "x.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://x.com/home",
+  "added": "2026-10-04"
+}

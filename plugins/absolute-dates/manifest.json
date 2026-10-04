@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Real Dates",
+  "version": "1.0.0",
+  "description": "Puts the actual date beside \"3 weeks ago\" on YouTube videos and Reddit posts and comments.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://www.reddit.com/*"],
+      "css": ["page/style.css"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

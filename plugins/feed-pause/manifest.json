@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Feed Pause",
+  "version": "1.0.0",
+  "description": "Five seconds to breathe before the X, YouTube or Reddit feed, at most once every 30 minutes per site.",
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://www.youtube.com/*", "https://www.reddit.com/*"],
+      "css": ["page/style.css"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Following First",
+  "version": "1.0.0",
+  "description": "X's home timeline opens on Following instead of For you.",
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

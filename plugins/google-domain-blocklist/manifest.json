@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Blocked Sites",
+  "version": "1.0.0",
+  "description": "Hides Google results from the sites you list, with a small pill on the results page to change the list.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/search*"],
+      "css": ["page/style.css"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

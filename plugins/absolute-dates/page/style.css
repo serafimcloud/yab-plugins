@@ -1,0 +1,8 @@
+.yab-abs-date {
+  margin-left: 0.35em;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+ytd-watch-info-text .yab-abs-date {
+  font-weight: 500;
+}

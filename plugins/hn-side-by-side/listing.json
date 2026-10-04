@@ -1,0 +1,9 @@
+{
+  "name": "Article and Comments",
+  "intent": "On a Hacker News discussion, put the article right above the comments so I can open it beside them, let me save the story to read later, and mark the comments that are new since my last visit, with a way to jump from one new comment to the next. On the front page, show how many comments are new on stories I have opened.",
+  "host": "news.ycombinator.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://news.ycombinator.com/item?id=8863",
+  "added": "2026-10-04"
+}

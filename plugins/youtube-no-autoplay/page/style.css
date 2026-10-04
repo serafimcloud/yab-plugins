@@ -1,0 +1,5 @@
+/* Hover previews on the home page, search and channel grids. */
+ytd-video-preview,
+#video-preview {
+  display: none !important;
+}

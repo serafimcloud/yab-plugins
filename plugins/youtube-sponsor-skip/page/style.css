@@ -1,0 +1,32 @@
+.yab-sponsor-toast {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px 7px 12px;
+  border-radius: 999px;
+  background: rgba(15, 15, 15, 0.86);
+  color: #fff;
+  font: 500 13px/1.2 Roboto, Arial, sans-serif;
+  pointer-events: auto;
+  transition: opacity 0.2s ease;
+}
+.yab-sponsor-toast[hidden] {
+  display: none;
+}
+.yab-sponsor-toast button {
+  border: 0;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.yab-sponsor-toast button:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
