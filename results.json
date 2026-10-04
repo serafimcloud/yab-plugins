@@ -1,0 +1,1110 @@
+{
+  "github-no-dashboard-feed": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:29:33Z",
+    "note": "needs sign-in: nothing to hide on the signed-out page",
+    "url": "https://github.com/",
+    "before": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of .feed-content",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "[data-target=\"feed-container.feed\"], .feed-content": 0
+      }
+    },
+    "after": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of .feed-content",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "[data-target=\"feed-container.feed\"], .feed-content": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/github-no-dashboard-feed/before.webp",
+      "after": "pictures/github-no-dashboard-feed/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 0,
+      "sampled": 0
+    }
+  },
+  "github-readable-code": {
+    "state": "works",
+    "at": "2026-10-04T03:29:33Z",
+    "note": null,
+    "url": "https://github.com/swiftlang/swift/blob/main/CMakeLists.txt",
+    "before": {
+      "path": "/swiftlang/swift/blob/main/CMakeLists.txt",
+      "checks": [
+        {
+          "line": "on /*: some of [data-testid='code-cell'], .blob-code-inner",
+          "state": "pass",
+          "found": 214,
+          "present": 214
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".blob-code, .blob-code-inner, [data-testid=\"code-cell\"]": 214,
+        "#read-only-cursor-text-area": 1
+      }
+    },
+    "after": {
+      "path": "/swiftlang/swift/blob/main/CMakeLists.txt",
+      "checks": [
+        {
+          "line": "on /*: some of [data-testid='code-cell'], .blob-code-inner",
+          "state": "pass",
+          "found": 214,
+          "present": 214
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".blob-code, .blob-code-inner, [data-testid=\"code-cell\"]": 214,
+        "#read-only-cursor-text-area": 1
+      }
+    },
+    "pictures": {
+      "before": "pictures/github-readable-code/before.webp",
+      "after": "pictures/github-readable-code/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 41,
+      "sampled": 41
+    }
+  },
+  "github-wide-repository": {
+    "state": "works",
+    "at": "2026-10-04T03:29:33Z",
+    "note": null,
+    "url": "https://github.com/swiftlang/swift",
+    "before": {
+      "path": "/swiftlang/swift",
+      "checks": [
+        {
+          "line": "on /*: some of .container-xl",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".container-xl": 1
+      }
+    },
+    "after": {
+      "path": "/swiftlang/swift",
+      "checks": [
+        {
+          "line": "on /*: some of .container-xl",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".container-xl": 1
+      }
+    },
+    "pictures": {
+      "before": "pictures/github-wide-repository/before.webp",
+      "after": "pictures/github-wide-repository/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 1,
+      "sampled": 1
+    }
+  },
+  "hn-hide-scores": {
+    "state": "works",
+    "at": "2026-10-04T03:29:33Z",
+    "note": null,
+    "url": "https://news.ycombinator.com/",
+    "before": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of .score",
+          "state": "fail",
+          "found": 29,
+          "present": 29
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".score": 29
+      }
+    },
+    "after": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of .score",
+          "state": "pass",
+          "found": 0,
+          "present": 29
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".score": 29
+      }
+    },
+    "pictures": {
+      "before": "pictures/hn-hide-scores/before.webp",
+      "after": "pictures/hn-hide-scores/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 29,
+      "sampled": 29
+    }
+  },
+  "hn-readable": {
+    "state": "works",
+    "at": "2026-10-04T03:29:41Z",
+    "note": null,
+    "url": "https://news.ycombinator.com/",
+    "before": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: some of .title",
+          "state": "pass",
+          "found": 61,
+          "present": 61
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "body, td, .comment, .title, .comhead, .subtext": 189,
+        ".spacer": 30
+      }
+    },
+    "after": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: some of .title",
+          "state": "pass",
+          "found": 61,
+          "present": 61
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "body, td, .comment, .title, .comhead, .subtext": 189,
+        ".spacer": 30
+      }
+    },
+    "pictures": {
+      "before": "pictures/hn-readable/before.webp",
+      "after": "pictures/hn-readable/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 70,
+      "sampled": 70
+    }
+  },
+  "hn-wide-comments": {
+    "state": "works",
+    "at": "2026-10-04T03:29:45Z",
+    "note": null,
+    "url": "https://news.ycombinator.com/item?id=1",
+    "before": {
+      "path": "/item",
+      "checks": [
+        {
+          "line": "on /*: some of .comment",
+          "state": "pass",
+          "found": 3,
+          "present": 3
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".comment": 3,
+        ".comtr td": 12
+      }
+    },
+    "after": {
+      "path": "/item",
+      "checks": [
+        {
+          "line": "on /*: some of .comment",
+          "state": "pass",
+          "found": 3,
+          "present": 3
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".comment": 3,
+        ".comtr td": 12
+      }
+    },
+    "pictures": {
+      "before": "pictures/hn-wide-comments/before.webp",
+      "after": "pictures/hn-wide-comments/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 15,
+      "sampled": 15
+    }
+  },
+  "mdn-readable": {
+    "state": "works",
+    "at": "2026-10-04T03:29:45Z",
+    "note": null,
+    "url": "https://developer.mozilla.org/en-US/docs/Web",
+    "before": {
+      "path": "/en-US/docs/Web",
+      "checks": [
+        {
+          "line": "on /*: some of main",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "main": 1,
+        "pre": 0
+      }
+    },
+    "after": {
+      "path": "/en-US/docs/Web",
+      "checks": [
+        {
+          "line": "on /*: some of main",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "main": 1,
+        "pre": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/mdn-readable/before.webp",
+      "after": "pictures/mdn-readable/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 1,
+      "sampled": 1
+    }
+  },
+  "npm-readable-readme": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:29:45Z",
+    "note": "blocked",
+    "url": "https://www.npmjs.com/package/react",
+    "before": {
+      "path": "/package/react",
+      "checks": [
+        {
+          "line": "on /*: some of #readme",
+          "state": "fail",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "#readme": 0
+      }
+    },
+    "after": {
+      "path": "/package/react",
+      "checks": [
+        {
+          "line": "on /*: some of #readme",
+          "state": "fail",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "#readme": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/npm-readable-readme/before.webp",
+      "after": "pictures/npm-readable-readme/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 0,
+      "sampled": 0
+    }
+  },
+  "reddit-hide-promoted": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:29:48Z",
+    "note": "blocked",
+    "url": "https://www.reddit.com/",
+    "before": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of shreddit-ad-post",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "shreddit-ad-post, [data-promoted=\"true\"]": 0
+      }
+    },
+    "after": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of shreddit-ad-post",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "shreddit-ad-post, [data-promoted=\"true\"]": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/reddit-hide-promoted/before.webp",
+      "after": "pictures/reddit-hide-promoted/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 0,
+      "sampled": 0
+    }
+  },
+  "reddit-hide-sidebar": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:29:51Z",
+    "note": "blocked",
+    "url": "https://www.reddit.com/",
+    "before": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of #right-sidebar-container",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "#right-sidebar-container": 0
+      }
+    },
+    "after": {
+      "path": "/",
+      "checks": [
+        {
+          "line": "on /*: none of #right-sidebar-container",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "#right-sidebar-container": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/reddit-hide-sidebar/before.webp",
+      "after": "pictures/reddit-hide-sidebar/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 0,
+      "sampled": 0
+    }
+  },
+  "stackoverflow-hide-hot": {
+    "state": "works",
+    "at": "2026-10-04T03:29:53Z",
+    "note": null,
+    "url": "https://stackoverflow.com/questions",
+    "before": {
+      "path": "/questions",
+      "checks": [
+        {
+          "line": "on /*: none of #hot-network-questions",
+          "state": "fail",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "#hot-network-questions": 1
+      }
+    },
+    "after": {
+      "path": "/questions",
+      "checks": [
+        {
+          "line": "on /*: none of #hot-network-questions",
+          "state": "pass",
+          "found": 0,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "#hot-network-questions": 1
+      }
+    },
+    "pictures": {
+      "before": "pictures/stackoverflow-hide-hot/before.webp",
+      "after": "pictures/stackoverflow-hide-hot/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 1,
+      "sampled": 1
+    }
+  },
+  "stackoverflow-readable-code": {
+    "state": "works",
+    "at": "2026-10-04T03:30:03Z",
+    "note": null,
+    "url": "https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array",
+    "before": {
+      "path": "/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array",
+      "checks": [
+        {
+          "line": "on /*: some of pre",
+          "state": "pass",
+          "found": 59,
+          "present": 61
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "pre, code": 300
+      }
+    },
+    "after": {
+      "path": "/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array",
+      "checks": [
+        {
+          "line": "on /*: some of pre",
+          "state": "pass",
+          "found": 59,
+          "present": 61
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "pre, code": 300
+      }
+    },
+    "pictures": {
+      "before": "pictures/stackoverflow-readable-code/before.webp",
+      "after": "pictures/stackoverflow-readable-code/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 40,
+      "sampled": 40
+    }
+  },
+  "wikipedia-readable": {
+    "state": "works",
+    "at": "2026-10-04T03:30:13Z",
+    "note": null,
+    "url": "https://en.wikipedia.org/wiki/Main_Page",
+    "before": {
+      "path": "/wiki/Main_Page",
+      "checks": [
+        {
+          "line": "on /*: some of .mw-parser-output",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".mw-parser-output": 1
+      }
+    },
+    "after": {
+      "path": "/wiki/Main_Page",
+      "checks": [
+        {
+          "line": "on /*: some of .mw-parser-output",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".mw-parser-output": 1
+      }
+    },
+    "pictures": {
+      "before": "pictures/wikipedia-readable/before.webp",
+      "after": "pictures/wikipedia-readable/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 1,
+      "sampled": 1
+    }
+  },
+  "wikipedia-wide": {
+    "state": "works",
+    "at": "2026-10-04T03:30:14Z",
+    "note": null,
+    "url": "https://en.wikipedia.org/wiki/Web_browser",
+    "before": {
+      "path": "/wiki/Web_browser",
+      "checks": [
+        {
+          "line": "on /*: some of .mw-page-container",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".mw-page-container, .vector-header, .mw-body, .mw-content-container": 4
+      }
+    },
+    "after": {
+      "path": "/wiki/Web_browser",
+      "checks": [
+        {
+          "line": "on /*: some of .mw-page-container",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        ".mw-page-container, .vector-header, .mw-body, .mw-content-container": 4
+      }
+    },
+    "pictures": {
+      "before": "pictures/wikipedia-wide/before.webp",
+      "after": "pictures/wikipedia-wide/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 2,
+      "sampled": 4
+    }
+  },
+  "x-hide-counts": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:30:17Z",
+    "note": "blocked",
+    "url": "https://x.com/home",
+    "before": {
+      "path": "/home",
+      "checks": [
+        {
+          "line": "on /*: none of [data-testid='tweet'] [data-testid='app-text-transition-container']",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "[data-testid=\"tweet\"] [data-testid=\"app-text-transition-container\"]": 0
+      }
+    },
+    "after": {
+      "path": "/home",
+      "checks": [
+        {
+          "line": "on /*: none of [data-testid='tweet'] [data-testid='app-text-transition-container']",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "[data-testid=\"tweet\"] [data-testid=\"app-text-transition-container\"]": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/x-hide-counts/before.webp",
+      "after": "pictures/x-hide-counts/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 0,
+      "sampled": 0
+    }
+  },
+  "x-no-follow-suggestions": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:30:20Z",
+    "note": "blocked",
+    "url": "https://x.com/home",
+    "before": {
+      "path": "/home",
+      "checks": [
+        {
+          "line": "on /*: none of aside[aria-label='Who to follow']",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "aside[aria-label=\"Who to follow\"]": 0
+      }
+    },
+    "after": {
+      "path": "/home",
+      "checks": [
+        {
+          "line": "on /*: none of aside[aria-label='Who to follow']",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "aside[aria-label=\"Who to follow\"]": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/x-no-follow-suggestions/before.webp",
+      "after": "pictures/x-no-follow-suggestions/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 0,
+      "sampled": 0
+    }
+  },
+  "x-no-trends": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:30:22Z",
+    "note": "blocked",
+    "url": "https://x.com/home",
+    "before": {
+      "path": "/home",
+      "checks": [
+        {
+          "line": "on /*: none of [data-testid='trend']",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "[aria-label=\"Timeline: Trending now\"], [data-testid=\"trend\"]": 0
+      }
+    },
+    "after": {
+      "path": "/home",
+      "checks": [
+        {
+          "line": "on /*: none of [data-testid='trend']",
+          "state": "pass",
+          "found": 0,
+          "present": 0
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "[aria-label=\"Timeline: Trending now\"], [data-testid=\"trend\"]": 0
+      }
+    },
+    "pictures": {
+      "before": "pictures/x-no-trends/before.webp",
+      "after": "pictures/x-no-trends/after.webp"
+    },
+    "status": 403,
+    "styles": {
+      "changed": 0,
+      "sampled": 0
+    }
+  },
+  "youtube-no-comments": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:30:23Z",
+    "note": "blocked",
+    "url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+    "before": {
+      "path": "/watch",
+      "checks": [
+        {
+          "line": "on /*: none of ytd-comments",
+          "state": "fail",
+          "found": 1,
+          "present": 2
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "ytd-comments": 2
+      }
+    },
+    "after": {
+      "path": "/watch",
+      "checks": [
+        {
+          "line": "on /*: none of ytd-comments",
+          "state": "pass",
+          "found": 0,
+          "present": 2
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "ytd-comments": 2
+      }
+    },
+    "pictures": {
+      "before": "pictures/youtube-no-comments/before.webp",
+      "after": "pictures/youtube-no-comments/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 2,
+      "sampled": 2
+    }
+  },
+  "youtube-no-related": {
+    "state": "unchecked",
+    "at": "2026-10-04T03:30:45Z",
+    "note": "blocked",
+    "url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+    "before": {
+      "path": "/watch",
+      "checks": [
+        {
+          "line": "on /*: none of ytd-watch-next-secondary-results-renderer",
+          "state": "fail",
+          "found": 1,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "ytd-watch-next-secondary-results-renderer": 1
+      }
+    },
+    "after": {
+      "path": "/watch",
+      "checks": [
+        {
+          "line": "on /*: none of ytd-watch-next-secondary-results-renderer",
+          "state": "pass",
+          "found": 0,
+          "present": 1
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "ytd-watch-next-secondary-results-renderer": 1
+      }
+    },
+    "pictures": {
+      "before": "pictures/youtube-no-related/before.webp",
+      "after": "pictures/youtube-no-related/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 1,
+      "sampled": 1
+    }
+  },
+  "youtube-no-shorts": {
+    "state": "works",
+    "at": "2026-10-04T03:30:47Z",
+    "note": null,
+    "url": "https://www.youtube.com/results?search_query=minecraft",
+    "before": {
+      "path": "/results",
+      "checks": [
+        {
+          "line": "on /*: none of ytd-reel-shelf-renderer, ytd-rich-shelf-renderer[is-shorts], grid-shelf-view-model:has(a[href^='/shorts/']), a[href^='/shorts/']",
+          "state": "fail",
+          "found": 37,
+          "present": 37
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "ytd-reel-shelf-renderer, ytd-rich-shelf-renderer[is-shorts], grid-shelf-view-model:has(a[href^=\"/shorts/\"]), ytd-rich-section-renderer:has(a[href^=\"/shorts/\"]), ytd-rich-item-renderer:has(a[href^=\"/shorts/\"]), ytd-video-renderer:has(a[href^=\"/shorts/\"]), a[href^=\"/shorts/\"]": 37
+      }
+    },
+    "after": {
+      "path": "/results",
+      "checks": [
+        {
+          "line": "on /*: none of ytd-reel-shelf-renderer, ytd-rich-shelf-renderer[is-shorts], grid-shelf-view-model:has(a[href^='/shorts/']), a[href^='/shorts/']",
+          "state": "pass",
+          "found": 0,
+          "present": 37
+        },
+        {
+          "line": "on /*: some of body",
+          "state": "pass",
+          "found": 1,
+          "present": 1
+        }
+      ],
+      "matched": {
+        "ytd-reel-shelf-renderer, ytd-rich-shelf-renderer[is-shorts], grid-shelf-view-model:has(a[href^=\"/shorts/\"]), ytd-rich-section-renderer:has(a[href^=\"/shorts/\"]), ytd-rich-item-renderer:has(a[href^=\"/shorts/\"]), ytd-video-renderer:has(a[href^=\"/shorts/\"]), a[href^=\"/shorts/\"]": 37
+      }
+    },
+    "pictures": {
+      "before": "pictures/youtube-no-shorts/before.webp",
+      "after": "pictures/youtube-no-shorts/after.webp"
+    },
+    "status": 200,
+    "styles": {
+      "changed": 37,
+      "sampled": 37
+    }
+  }
+}

@@ -1,0 +1,706 @@
+{
+  "format": 1,
+  "generated": "2026-10-04T03:32:48Z",
+  "items": [
+    {
+      "id": "github-no-dashboard-feed",
+      "name": "Quiet GitHub home",
+      "intent": "Hide the activity feed on GitHub's dashboard.",
+      "sites": [
+        "github.com"
+      ],
+      "host": "github.com",
+      "rung": "Look",
+      "rights": "Change how github.com looks. No code runs.",
+      "revision": "51c258e7ac00d152815671d4f19f75c32a6403aeb63ed64b22015ee29ad6db08",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:29:33Z",
+        "note": "needs sign-in: nothing to hide on the signed-out page"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/github-no-dashboard-feed/before.webp",
+        "after": "/store/p/github-no-dashboard-feed/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://github.com/"
+    },
+    {
+      "id": "github-readable-code",
+      "name": "Larger code",
+      "intent": "Make source code and diffs on GitHub easier to read.",
+      "sites": [
+        "github.com"
+      ],
+      "host": "github.com",
+      "rung": "Look",
+      "rights": "Change how github.com looks. No code runs.",
+      "revision": "45e06b53b692bce3736baa5881a893487d625d8b2d25ce0a8c19a32148f5fd0e",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": true,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:29:33Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/github-readable-code/before.webp",
+        "after": "/store/p/github-readable-code/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://github.com/swiftlang/swift/blob/main/CMakeLists.txt"
+    },
+    {
+      "id": "github-wide-repository",
+      "name": "Wider repositories",
+      "intent": "Let GitHub repository content use the full available width.",
+      "sites": [
+        "github.com"
+      ],
+      "host": "github.com",
+      "rung": "Look",
+      "rights": "Change how github.com looks. No code runs.",
+      "revision": "e0498eac74d8b84b436090fb4bf8cdeab47044e2838160f01c435f08057bc9dc",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:29:33Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/github-wide-repository/before.webp",
+        "after": "/store/p/github-wide-repository/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://github.com/swiftlang/swift"
+    },
+    {
+      "id": "hn-hide-scores",
+      "name": "Hide HN scores",
+      "intent": "Hide Hacker News scores while keeping stories and comments.",
+      "sites": [
+        "news.ycombinator.com"
+      ],
+      "host": "news.ycombinator.com",
+      "rung": "Look",
+      "rights": "Change how news.ycombinator.com looks. No code runs.",
+      "revision": "37e537808de737645f730595579004cd15da56a50d3e013ec025ccf395dee445",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:29:33Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/hn-hide-scores/before.webp",
+        "after": "/store/p/hn-hide-scores/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://news.ycombinator.com/"
+    },
+    {
+      "id": "hn-readable",
+      "name": "Readable Hacker News",
+      "intent": "Make Hacker News text larger with more breathing room.",
+      "sites": [
+        "news.ycombinator.com"
+      ],
+      "host": "news.ycombinator.com",
+      "rung": "Look",
+      "rights": "Change how news.ycombinator.com looks. No code runs.",
+      "revision": "1f627498f6334f7638d7a428dacebb4149a16cc5e8b044c5d6edd393d7229735",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": true,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:29:41Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/hn-readable/before.webp",
+        "after": "/store/p/hn-readable/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://news.ycombinator.com/"
+    },
+    {
+      "id": "hn-wide-comments",
+      "name": "Roomier HN comments",
+      "intent": "Give Hacker News discussions a readable width and spacing.",
+      "sites": [
+        "news.ycombinator.com"
+      ],
+      "host": "news.ycombinator.com",
+      "rung": "Look",
+      "rights": "Change how news.ycombinator.com looks. No code runs.",
+      "revision": "7e2962cf85cdd22a490fd8e7c91e0084265ffec8efe2cb2f866155fc59e0822c",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:29:45Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/hn-wide-comments/before.webp",
+        "after": "/store/p/hn-wide-comments/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://news.ycombinator.com/item?id=1"
+    },
+    {
+      "id": "mdn-readable",
+      "name": "Readable MDN",
+      "intent": "Make MDN article text larger and code easier to read.",
+      "sites": [
+        "developer.mozilla.org"
+      ],
+      "host": "developer.mozilla.org",
+      "rung": "Look",
+      "rights": "Change how developer.mozilla.org looks. No code runs.",
+      "revision": "5d8f1e82f8d87b22ad3e72a2642e5461ff74320c5e5ef15b596fd78d7d4e12ad",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:29:45Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/mdn-readable/before.webp",
+        "after": "/store/p/mdn-readable/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://developer.mozilla.org/en-US/docs/Web"
+    },
+    {
+      "id": "npm-readable-readme",
+      "name": "Readable package docs",
+      "intent": "Make npm package READMEs easier to read.",
+      "sites": [
+        "www.npmjs.com"
+      ],
+      "host": "npmjs.com",
+      "rung": "Look",
+      "rights": "Change how npmjs.com looks. No code runs.",
+      "revision": "281982ae3a9ed10c700af41608560a638d9baff2a61d59d0565627cb36984c66",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:29:45Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/npm-readable-readme/before.webp",
+        "after": "/store/p/npm-readable-readme/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://www.npmjs.com/package/react"
+    },
+    {
+      "id": "reddit-hide-promoted",
+      "name": "Hide promoted Reddit cards",
+      "intent": "Hide cards marked as promoted on Reddit.",
+      "sites": [
+        "www.reddit.com"
+      ],
+      "host": "reddit.com",
+      "rung": "Look",
+      "rights": "Change how reddit.com looks. No code runs.",
+      "revision": "fe42ca33433ee66ccc3227e5bbb63fc16bf0930d20cb6a14af9814c27756394d",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": true,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:29:48Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/reddit-hide-promoted/before.webp",
+        "after": "/store/p/reddit-hide-promoted/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://www.reddit.com/"
+    },
+    {
+      "id": "reddit-hide-sidebar",
+      "name": "Quiet Reddit sidebar",
+      "intent": "Hide Reddit's right sidebar while keeping the feed.",
+      "sites": [
+        "www.reddit.com"
+      ],
+      "host": "reddit.com",
+      "rung": "Look",
+      "rights": "Change how reddit.com looks. No code runs.",
+      "revision": "5ea70f06e17a47a401cddbc95b82f7be08bb9c945561352b61b2270c6d9b7939",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:29:51Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/reddit-hide-sidebar/before.webp",
+        "after": "/store/p/reddit-hide-sidebar/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://www.reddit.com/"
+    },
+    {
+      "id": "stackoverflow-hide-hot",
+      "name": "Hide hot network questions",
+      "intent": "Hide Hot Network Questions on Stack Overflow.",
+      "sites": [
+        "stackoverflow.com"
+      ],
+      "host": "stackoverflow.com",
+      "rung": "Look",
+      "rights": "Change how stackoverflow.com looks. No code runs.",
+      "revision": "e17349440a783925c8ab248d6aa0bd785eab250b213e21f08d793a38c6057f49",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:29:53Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/stackoverflow-hide-hot/before.webp",
+        "after": "/store/p/stackoverflow-hide-hot/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://stackoverflow.com/questions"
+    },
+    {
+      "id": "stackoverflow-readable-code",
+      "name": "Larger code examples",
+      "intent": "Make Stack Overflow code examples larger.",
+      "sites": [
+        "stackoverflow.com"
+      ],
+      "host": "stackoverflow.com",
+      "rung": "Look",
+      "rights": "Change how stackoverflow.com looks. No code runs.",
+      "revision": "9fb8bf0203eab9919af752d7cd4ac451690574fb35fbb4516ab5f500c8593eeb",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:30:03Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/stackoverflow-readable-code/before.webp",
+        "after": "/store/p/stackoverflow-readable-code/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array"
+    },
+    {
+      "id": "wikipedia-readable",
+      "name": "Readable Wikipedia",
+      "intent": "Make Wikipedia's article text larger and easier to read.",
+      "sites": [
+        "en.wikipedia.org"
+      ],
+      "host": "en.wikipedia.org",
+      "rung": "Look",
+      "rights": "Change how en.wikipedia.org looks. No code runs.",
+      "revision": "a867382ccbd0c0469486dc770c8da59e48096a9cd3372c81890e843d2e32edbd",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": true,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:30:13Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/wikipedia-readable/before.webp",
+        "after": "/store/p/wikipedia-readable/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://en.wikipedia.org/wiki/Main_Page"
+    },
+    {
+      "id": "wikipedia-wide",
+      "name": "Wide Wikipedia articles",
+      "intent": "Let Wikipedia articles use more of the window.",
+      "sites": [
+        "en.wikipedia.org"
+      ],
+      "host": "en.wikipedia.org",
+      "rung": "Look",
+      "rights": "Change how en.wikipedia.org looks. No code runs.",
+      "revision": "5391d006338b89b42ed92872dbc6014c5b6f7c3c9c14c2066bcabb7e39e0f692",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:30:14Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/wikipedia-wide/before.webp",
+        "after": "/store/p/wikipedia-wide/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://en.wikipedia.org/wiki/Web_browser"
+    },
+    {
+      "id": "x-hide-counts",
+      "name": "Hide engagement counts",
+      "intent": "Hide numerical engagement counts on X tweets, keeping the action buttons.",
+      "sites": [
+        "x.com"
+      ],
+      "host": "x.com",
+      "rung": "Look",
+      "rights": "Change how x.com looks. No code runs.",
+      "revision": "96e1d52b9082189fdac0d32a8c4744fa31498a78fa685abad1f7328a98cde4a9",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:30:17Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/x-hide-counts/before.webp",
+        "after": "/store/p/x-hide-counts/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://x.com/home"
+    },
+    {
+      "id": "x-no-follow-suggestions",
+      "name": "Hide follow suggestions",
+      "intent": "Hide Who to follow suggestions on X.",
+      "sites": [
+        "x.com"
+      ],
+      "host": "x.com",
+      "rung": "Look",
+      "rights": "Change how x.com looks. No code runs.",
+      "revision": "bbbad5e669b2720be9f042f8b5dd685e0787128add7504de1878b7fc2b3b2dcd",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:30:20Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/x-no-follow-suggestions/before.webp",
+        "after": "/store/p/x-no-follow-suggestions/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://x.com/home"
+    },
+    {
+      "id": "x-no-trends",
+      "name": "Hide trends",
+      "intent": "Hide the What's happening and trending blocks on X.",
+      "sites": [
+        "x.com"
+      ],
+      "host": "x.com",
+      "rung": "Look",
+      "rights": "Change how x.com looks. No code runs.",
+      "revision": "fce2897b4aec13386b6a395ccd77a26ba9d13beb60587b7e6afd83d59d574690",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:30:22Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/x-no-trends/before.webp",
+        "after": "/store/p/x-no-trends/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://x.com/home"
+    },
+    {
+      "id": "youtube-no-comments",
+      "name": "Hide video comments",
+      "intent": "Hide YouTube comments below videos.",
+      "sites": [
+        "www.youtube.com"
+      ],
+      "host": "youtube.com",
+      "rung": "Look",
+      "rights": "Change how youtube.com looks. No code runs.",
+      "revision": "4ccbf1c1362817abba5dd7cf22bc4da179ff275da1e1a9b8eb14b474961b1577",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:30:23Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/youtube-no-comments/before.webp",
+        "after": "/store/p/youtube-no-comments/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+    },
+    {
+      "id": "youtube-no-related",
+      "name": "Hide related videos",
+      "intent": "Hide related videos beside YouTube's player.",
+      "sites": [
+        "www.youtube.com"
+      ],
+      "host": "youtube.com",
+      "rung": "Look",
+      "rights": "Change how youtube.com looks. No code runs.",
+      "revision": "e543d2ddb05aa8ca8328f37df1de9fe05e18f068d38ed54ba949bc71495258b7",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": false,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "unchecked",
+        "at": "2026-10-04T03:30:45Z",
+        "note": "blocked"
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/youtube-no-related/before.webp",
+        "after": "/store/p/youtube-no-related/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+    },
+    {
+      "id": "youtube-no-shorts",
+      "name": "Hide Shorts",
+      "intent": "Hide YouTube Shorts shelves and Shorts links.",
+      "sites": [
+        "www.youtube.com"
+      ],
+      "host": "youtube.com",
+      "rung": "Look",
+      "rights": "Change how youtube.com looks. No code runs.",
+      "revision": "25a84396e41b3fbf7a7aae2e56f4a444ccaf20e6e5521baca0fa71e72357fd2f",
+      "commit": "4897573",
+      "by": "Yab",
+      "picks": true,
+      "added": "2026-10-03",
+      "fixed": null,
+      "check": {
+        "state": "works",
+        "at": "2026-10-04T03:30:47Z",
+        "note": null
+      },
+      "kept": null,
+      "pictures": {
+        "before": "/store/p/youtube-no-shorts/before.webp",
+        "after": "/store/p/youtube-no-shorts/after.webp"
+      },
+      "versions": [
+        {
+          "commit": "4897573",
+          "date": "2026-10-03",
+          "note": "First version"
+        }
+      ],
+      "preview": "https://www.youtube.com/results?search_query=minecraft"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "github-no-dashboard-feed": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "github-readable-code": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:29:33Z"
+  },
+  "github-wide-repository": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:29:33Z"
+  },
+  "hn-hide-scores": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:29:33Z"
+  },
+  "hn-readable": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:29:41Z"
+  },
+  "hn-wide-comments": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:29:45Z"
+  },
+  "mdn-readable": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:29:45Z"
+  },
+  "npm-readable-readme": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "reddit-hide-promoted": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "reddit-hide-sidebar": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "stackoverflow-hide-hot": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:29:53Z"
+  },
+  "stackoverflow-readable-code": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:30:03Z"
+  },
+  "wikipedia-readable": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:30:13Z"
+  },
+  "wikipedia-wide": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:30:14Z"
+  },
+  "x-hide-counts": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "x-no-follow-suggestions": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "x-no-trends": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "youtube-no-comments": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "youtube-no-related": {
+    "days": {
+      "2026-10-04": "unchecked"
+    },
+    "lastWorks": null
+  },
+  "youtube-no-shorts": {
+    "days": {
+      "2026-10-04": "works"
+    },
+    "lastWorks": "2026-10-04T03:30:47Z"
+  }
+}
