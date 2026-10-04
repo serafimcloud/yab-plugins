@@ -1,0 +1,9 @@
+{
+  "name": "DuckDuckGo without AI",
+  "intent": "On DuckDuckGo, hide the AI: no Search Assist answers above the results, no Duck.ai tab or chat button in the search box. The search box, the tabs for Images, Videos and News, the results and related searches stay.",
+  "host": "duckduckgo.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://duckduckgo.com/?q=how+long+to+boil+an+egg&ia=web",
+  "added": "2026-10-04"
+}

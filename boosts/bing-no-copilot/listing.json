@@ -1,0 +1,9 @@
+{
+  "name": "Bing without Copilot",
+  "intent": "On Bing, hide Copilot: the AI answer above the results, the AI Mode tab, and the Copilot question box and suggestions under the results, so the page starts with the web links.",
+  "host": "bing.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.bing.com/search?q=how+long+to+boil+an+egg&setlang=en",
+  "added": "2026-10-04"
+}

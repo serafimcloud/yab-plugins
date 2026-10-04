@@ -1,0 +1,9 @@
+{
+  "name": "Amazon without Rufus",
+  "intent": "On Amazon, hide Rufus, the shopping assistant (now called Alexa for shopping): the button next to the search bar, its chat panel, the Price history links that open it, and its suggested questions. Search, the cart, prices, Add to Cart and Buy Now stay, and the page keeps its full width.",
+  "host": "amazon.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.amazon.com/dp/B0FQFB8FMG",
+  "added": "2026-10-04"
+}

@@ -1,0 +1,9 @@
+/* The Copilot answer above the results, the AI Mode tab, the Copilot
+   question box and suggestion chips below the results. */
+li:has(> #copans_container),
+#copans_container,
+#b_copilot_search_container,
+#b-scopeListItem-copilotsearch,
+a[href^="/copilotsearch"] {
+  display: none !important;
+}

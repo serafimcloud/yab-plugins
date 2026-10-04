@@ -1,0 +1,18 @@
+/* Rufus (now "Alexa for shopping"): the button by the search bar, its panel,
+   the "Price history" links that open it, and its question pills. */
+#nav-rufus-disco,
+#nav-flyout-rufus,
+[data-csa-c-slot-id^="rufus-price-ingress"],
+.rufus-ingress-div-block,
+.ucc-v2-widget__rufus-pills-trigger,
+[data-csa-c-slot-id="rufus-dsk-ask-rufus-tooltip"] {
+  display: none !important;
+}
+
+/* When the panel opens docked, Amazon pads the page to make room for it. */
+body.rufus-docked-left,
+body.rufus-docked-right {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+}

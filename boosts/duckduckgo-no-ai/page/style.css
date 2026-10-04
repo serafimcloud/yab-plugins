@@ -1,0 +1,10 @@
+/* Search Assist answers and their Explore More box, the Search Assist
+   toggle, and Duck.ai: its tab and the chat button in the search box. */
+[data-testid="mainline"] li:has([data-testid="duckassist-answer-content"]),
+[data-react-module-id="wikinlp"]:has([data-testid="duckassist-answer-content"]),
+[data-layout="explore_more"],
+[data-testid="duckbar"] a[href*="assist="],
+[data-testid="duckbar"] li:has(a[href*="ia=chat"]),
+[data-testid="search-form"] [data-testid="ask"] {
+  display: none !important;
+}
