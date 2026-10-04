@@ -1,0 +1,7 @@
+ytd-reel-shelf-renderer,
+ytd-rich-shelf-renderer[is-shorts],
+grid-shelf-view-model:has(a[href^='/shorts/']),
+ytd-rich-section-renderer:has(a[href^='/shorts/']),
+ytd-rich-item-renderer:has(a[href^='/shorts/']),
+ytd-video-renderer:has(a[href^='/shorts/']),
+a[href^='/shorts/'] { display: none !important; }

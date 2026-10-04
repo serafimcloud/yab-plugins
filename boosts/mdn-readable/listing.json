@@ -1,0 +1,9 @@
+{
+  "name": "Readable MDN",
+  "intent": "Make MDN article text larger and code easier to read.",
+  "host": "developer.mozilla.org",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://developer.mozilla.org/en-US/docs/Web",
+  "added": "2026-10-03"
+}

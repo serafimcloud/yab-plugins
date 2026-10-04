@@ -1,0 +1,9 @@
+{
+  "name": "Hide follow suggestions",
+  "intent": "Hide Who to follow suggestions on X.",
+  "host": "x.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://x.com/home",
+  "added": "2026-10-03"
+}

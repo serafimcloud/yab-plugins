@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Wide Wikipedia articles",
+  "version": "1.0.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://en.wikipedia.org/*"
+      ],
+      "css": [
+        "page/style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

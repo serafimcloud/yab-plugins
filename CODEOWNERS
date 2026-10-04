@@ -1,0 +1,7 @@
+# A person merges every change. New owners, sites or permissions need a
+# second review (the "second review needed" label).
+*                   @serafimcloud
+/CODEOWNERS         @serafimcloud
+/.github/           @serafimcloud
+/scripts/           @serafimcloud
+/plugins/           @serafimcloud

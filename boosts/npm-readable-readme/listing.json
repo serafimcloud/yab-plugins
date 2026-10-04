@@ -1,0 +1,9 @@
+{
+  "name": "Readable package docs",
+  "intent": "Make npm package READMEs easier to read.",
+  "host": "npmjs.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.npmjs.com/package/react",
+  "added": "2026-10-03"
+}

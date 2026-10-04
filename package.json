@@ -1,0 +1,21 @@
+{
+  "name": "yab-plugins",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Boosts and plugins for Yab's Store, with daily checks and the store catalog.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "check": "node scripts/check.mjs",
+    "catalog": "node scripts/catalog.mjs",
+    "test": "node scripts/validate.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.63.0"
+  },
+  "optionalDependencies": {
+    "sharp": "0.35.5"
+  }
+}

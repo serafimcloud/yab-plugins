@@ -1,0 +1,9 @@
+{
+  "name": "Wider repositories",
+  "intent": "Let GitHub repository content use the full available width.",
+  "host": "github.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://github.com/swiftlang/swift",
+  "added": "2026-10-03"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Larger code",
+  "intent": "Make source code and diffs on GitHub easier to read.",
+  "host": "github.com",
+  "by": "Yab",
+  "picks": true,
+  "preview": "https://github.com/swiftlang/swift/blob/main/CMakeLists.txt",
+  "added": "2026-10-03"
+}

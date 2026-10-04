@@ -1,0 +1,49 @@
+name: Daily check and catalog
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/validate.mjs
+      - name: Restore yesterday's history from the catalog branch
+        run: |
+          mkdir -p state
+          if git fetch origin catalog 2>/dev/null; then
+            git show origin/catalog:state/history.json > state/history.json 2>/dev/null || rm -f state/history.json
+          fi
+      - run: npx playwright install --with-deps webkit
+      - name: Check every boost
+        run: node scripts/check.mjs
+      - name: Build the catalog
+        run: node scripts/catalog.mjs
+      - name: Publish out/ to the catalog branch
+        run: |
+          cd out
+          rm -rf pictures
+          git init -q -b catalog
+          git config user.name "yab-plugins daily"
+          git config user.email "actions@users.noreply.github.com"
+          git add catalog.json b store state results.json summary.md
+          git commit -q -m "Catalog for $(date -u +%Y-%m-%d) from ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" catalog

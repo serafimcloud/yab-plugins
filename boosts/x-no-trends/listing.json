@@ -1,0 +1,9 @@
+{
+  "name": "Hide trends",
+  "intent": "Hide the What's happening and trending blocks on X.",
+  "host": "x.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://x.com/home",
+  "added": "2026-10-03"
+}

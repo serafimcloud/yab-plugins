@@ -1,0 +1,2 @@
+.blob-code, .blob-code-inner, [data-testid='code-cell'] { font-size: 14px !important; line-height: 1.7 !important; }
+#read-only-cursor-text-area { font-size: 14px !important; }

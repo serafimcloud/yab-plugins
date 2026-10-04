@@ -1,0 +1,9 @@
+{
+  "name": "Hide video comments",
+  "intent": "Hide YouTube comments below videos.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+  "added": "2026-10-03"
+}

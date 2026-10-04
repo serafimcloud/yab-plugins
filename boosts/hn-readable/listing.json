@@ -1,0 +1,9 @@
+{
+  "name": "Readable Hacker News",
+  "intent": "Make Hacker News text larger with more breathing room.",
+  "host": "news.ycombinator.com",
+  "by": "Yab",
+  "picks": true,
+  "preview": "https://news.ycombinator.com/",
+  "added": "2026-10-03"
+}

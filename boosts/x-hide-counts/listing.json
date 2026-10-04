@@ -1,0 +1,9 @@
+{
+  "name": "Hide engagement counts",
+  "intent": "Hide numerical engagement counts on X tweets, keeping the action buttons.",
+  "host": "x.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://x.com/home",
+  "added": "2026-10-03"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Readable Wikipedia",
+  "intent": "Make Wikipedia's article text larger and easier to read.",
+  "host": "en.wikipedia.org",
+  "by": "Yab",
+  "picks": true,
+  "preview": "https://en.wikipedia.org/wiki/Main_Page",
+  "added": "2026-10-03"
+}

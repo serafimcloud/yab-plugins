@@ -1,0 +1,39 @@
+name: Review rules
+
+# Runs with the base branch's code and reads the pull request only through git,
+# so it may label pull requests from forks without running their code.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  second-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+      - name: Fetch the pull request as data
+        run: git fetch origin "+refs/pull/${{ github.event.pull_request.number }}/head:refs/remotes/pr/head"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Look for new sites, permissions or owners
+        id: review
+        run: node scripts/validate.mjs --review "${{ github.event.pull_request.base.sha }}" pr/head
+      - name: Label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh label create "second review needed" --color D93F0B --description "New sites, permissions or owner" --repo "$GITHUB_REPOSITORY" 2>/dev/null || true
+          if [ "${{ steps.review.outputs.second_review }}" = "true" ]; then
+            gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --add-label "second review needed"
+          else
+            gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --remove-label "second review needed" 2>/dev/null || true
+          fi

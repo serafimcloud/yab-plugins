@@ -1,0 +1,9 @@
+{
+  "name": "Quiet GitHub home",
+  "intent": "Hide the activity feed on GitHub's dashboard.",
+  "host": "github.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://github.com/",
+  "added": "2026-10-03"
+}

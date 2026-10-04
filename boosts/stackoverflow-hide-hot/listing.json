@@ -1,0 +1,9 @@
+{
+  "name": "Hide hot network questions",
+  "intent": "Hide Hot Network Questions on Stack Overflow.",
+  "host": "stackoverflow.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://stackoverflow.com/questions",
+  "added": "2026-10-03"
+}

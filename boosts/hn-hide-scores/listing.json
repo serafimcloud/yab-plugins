@@ -1,0 +1,9 @@
+{
+  "name": "Hide HN scores",
+  "intent": "Hide Hacker News scores while keeping stories and comments.",
+  "host": "news.ycombinator.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://news.ycombinator.com/",
+  "added": "2026-10-03"
+}

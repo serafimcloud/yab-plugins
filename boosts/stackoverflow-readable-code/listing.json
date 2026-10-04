@@ -1,0 +1,9 @@
+{
+  "name": "Larger code examples",
+  "intent": "Make Stack Overflow code examples larger.",
+  "host": "stackoverflow.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+  "added": "2026-10-03"
+}

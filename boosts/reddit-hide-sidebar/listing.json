@@ -1,0 +1,9 @@
+{
+  "name": "Quiet Reddit sidebar",
+  "intent": "Hide Reddit's right sidebar while keeping the feed.",
+  "host": "reddit.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.reddit.com/",
+  "added": "2026-10-03"
+}

@@ -1,0 +1,63 @@
+name: Check boosts
+
+on:
+  pull_request:
+    paths:
+      - 'boosts/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validate
+        run: node scripts/validate.mjs
+      - run: npx playwright install --with-deps webkit
+      - name: Check changed boosts on their live pages
+        id: check
+        run: node scripts/check.mjs --changed "origin/${{ github.base_ref }}...HEAD"
+      - name: Upload pictures and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: boost-pictures
+          path: |
+            out/pictures
+            out/results.json
+          if-no-files-found: ignore
+      - name: Comment the summary
+        if: always() && hashFiles('out/summary.md') != ''
+        # Pull requests from forks get a read-only token; the summary is in the job page either way.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "### Boost checks"
+            echo
+            cat out/summary.md
+            echo
+            echo "Pictures: the boost-pictures artifact of [this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+            echo "\`unchecked\` means the page needed sign-in, showed a consent page or blocked the checker; it does not fail the pull request."
+          } > comment.md
+          gh pr comment ${{ github.event.pull_request.number }} --body-file comment.md --edit-last || \
+            gh pr comment ${{ github.event.pull_request.number }} --body-file comment.md

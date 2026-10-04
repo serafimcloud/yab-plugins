@@ -1,0 +1,9 @@
+{
+  "name": "Wide Wikipedia articles",
+  "intent": "Let Wikipedia articles use more of the window.",
+  "host": "en.wikipedia.org",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://en.wikipedia.org/wiki/Web_browser",
+  "added": "2026-10-03"
+}

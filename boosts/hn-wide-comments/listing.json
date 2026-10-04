@@ -1,0 +1,9 @@
+{
+  "name": "Roomier HN comments",
+  "intent": "Give Hacker News discussions a readable width and spacing.",
+  "host": "news.ycombinator.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://news.ycombinator.com/item?id=1",
+  "added": "2026-10-03"
+}

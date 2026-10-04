@@ -1,0 +1,9 @@
+{
+  "name": "Hide Shorts",
+  "intent": "Hide YouTube Shorts shelves and Shorts links.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": true,
+  "preview": "https://www.youtube.com/results?search_query=minecraft",
+  "added": "2026-10-03"
+}

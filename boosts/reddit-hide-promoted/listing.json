@@ -1,0 +1,9 @@
+{
+  "name": "Hide promoted Reddit cards",
+  "intent": "Hide cards marked as promoted on Reddit.",
+  "host": "reddit.com",
+  "by": "Yab",
+  "picks": true,
+  "preview": "https://www.reddit.com/",
+  "added": "2026-10-03"
+}
