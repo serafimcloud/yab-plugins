@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-// Validates every boost folder (or the ones named) against the rules Yab
-// enforces when it reads a package, plus the store's own listing rules.
+// Validates every boost folder in boosts/ and plugin folder in plugins/ (or
+// the ones named) against the rules Yab enforces when it reads a package,
+// plus the store's own listing rules. Plugins carry code: Yab's code rules
+// (readable, no dynamic code), `yab.hosts`, and an optional review.json.
 //
 //   node scripts/validate.mjs [id ...]
 //   node scripts/validate.mjs --review <base> [<head>]
@@ -13,14 +15,23 @@
 import { execFileSync } from 'node:child_process';
 import { appendFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { Script } from 'node:vm';
 import {
-  BOOSTS, HOST_PATTERN, ID_PATTERN, ROOT, boostIds, canonical, displayHost, envelopeOf,
-  matchHosts, parseBoostMd, readBoost, rungOf,
+  BOOSTS, HOST_PATTERN, ID_PATTERN, PLUGINS, ROOT, boostIds, canonical, displayHost, envelopeOf,
+  hostsOf, matchHosts, parseBoostMd, pluginIds, readBoost, rungOf,
 } from './lib/boosts.mjs';
 
 const MANIFEST_KEYS = new Set(['manifest_version', 'name', 'version', 'description', 'content_scripts', 'yab']);
 const SCRIPT_KEYS = new Set(['matches', 'css', 'js', 'run_at', 'all_frames']);
 const LISTING_KEYS = new Set(['name', 'intent', 'host', 'by', 'picks', 'preview', 'added']);
+const REVIEW_KEYS = new Set(['by', 'date', 'commit']);
+// BoostPlugin.parse in Yab, plus hosts (docs/store.md, "Other hosts").
+const YAB_KEYS = new Set(['permissions', 'tools', 'app', 'service', 'every', 'daily_limit', 'hosts']);
+const PERMISSIONS = new Set(['yab:ask', 'yab:memory', 'yab:route', 'yab:notify', 'yab:summarize', 'yab:translate', 'yab:calendar', 'yab:rows', 'yab:live', 'yab:task']);
+const MAX_HOSTS = 4;
+// BoostPackage.read: code must be readable and load no code at run time.
+const DYNAMIC_CODE = /\beval\s*\(|\bnew\s+Function\s*\(|\bimport\s*\(/i;
+const MAX_LINE_BYTES = 2000;
 // Bidi controls, zero-width characters, BOM and line/paragraph separators.
 const INVISIBLE = new RegExp('[' + [[0x202A, 0x202E], [0x2066, 0x2069], [0x200B, 0x200D], [0xFEFF, 0xFEFF], [0x2028, 0x2029]].map(([a, b]) => String.fromCharCode(a) + '-' + String.fromCharCode(b)).join('') + ']');
 const EM_DASH = String.fromCharCode(0x2014);
@@ -44,12 +55,30 @@ function globMatch(pattern, url) {
   return regex.test(target.pathname || '/');
 }
 
-export function validate(id) {
+/// The code rules for one .js or .html file.
+function codeProblems(path, text) {
+  const problems = [];
+  const lines = text.split(/\r\n|\r|\n/);
+  const long = lines.findIndex(line => Buffer.byteLength(line) > MAX_LINE_BYTES);
+  if (long >= 0) problems.push(`${path}:${long + 1}: line over ${MAX_LINE_BYTES} bytes; code must be readable, not minified`);
+  const dynamic = lines.findIndex(line => DYNAMIC_CODE.test(line));
+  if (dynamic >= 0) problems.push(`${path}:${dynamic + 1}: eval, new Function and import() are not allowed (also in comments and strings)`);
+  if (DYNAMIC_CODE.test(text) && dynamic < 0) problems.push(`${path}: eval, new Function or import() across lines`);
+  // Page scripts and checks run as the body of function(boost) { ... }.
+  if (path.endsWith('.js') && !path.endsWith('.mjs')) {
+    try { new Script('(function (boost) {\n' + text + '\n})', { filename: path }); }
+    catch (error) { problems.push(`${path}: does not parse: ${error.message}`); }
+  }
+  return problems;
+}
+
+export function validate(id, dir = BOOSTS) {
   const problems = [];
   const fail = message => problems.push(message);
+  const plugin = dir === PLUGINS;
   if (!ID_PATTERN.test(id) || id.length > 64) fail(`folder name "${id}" must be lowercase letters, numbers and single hyphens, at most 64 characters`);
   let boost;
-  try { boost = readBoost(id); } catch (error) { return [`cannot read: ${error.message}`]; }
+  try { boost = readBoost(id, dir); } catch (error) { return [`cannot read: ${error.message}`]; }
   const { files, manifest, listing } = boost;
 
   for (const required of ['manifest.json', 'BOOST.md', 'listing.json']) if (!(required in files)) fail(`missing ${required}`);
@@ -113,10 +142,21 @@ export function validate(id) {
     }
   }
 
-  // Look boosts carry no code at all.
+  // Look boosts carry no code at all; plugins carry code under Yab's rules.
   const rung = rungOf(manifest, files);
-  if (rung === 'Look' && Object.keys(files).some(p => p.endsWith('.js') || p.endsWith('.html'))) fail('Look boosts contain no JavaScript or HTML');
-  if (rung !== 'Look') fail(`rung is ${rung}: code is shared only through a reviewed plugin release (plugins/), not as a boost listing`);
+  if (!plugin) {
+    if (rung === 'Look' && Object.keys(files).some(p => p.endsWith('.js') || p.endsWith('.html'))) fail('Look boosts contain no JavaScript or HTML');
+    if (rung !== 'Look') fail(`rung is ${rung}: code is shared only through a reviewed plugin release (plugins/), not as a boost listing`);
+    if (manifest.yab !== undefined) fail('boosts have no "yab" metadata; plugins go in plugins/');
+    if ('review.json' in files) fail('review.json belongs to plugins/');
+  } else {
+    if (rung === 'Look') fail('a plugin without code is a Look boost: move it to boosts/');
+    for (const [path, text] of Object.entries(files)) {
+      if (path.endsWith('.js') || path.endsWith('.mjs') || path.endsWith('.html')) problems.push(...codeProblems(path, text));
+    }
+    pluginMetadata(manifest, md, files, fail);
+    if ('review.json' in files) reviewRecord(boost.review, fail);
+  }
 
   // listing.json: the store's words.
   if (!listing || typeof listing !== 'object') fail('listing.json is not a JSON object');
@@ -132,6 +172,45 @@ export function validate(id) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(listing.added ?? '')) fail('listing added must be YYYY-MM-DD');
   }
   return problems;
+}
+
+/// manifest.yab: the keys Yab reads, its permissions, and the other hosts.
+function pluginMetadata(manifest, md, files, fail) {
+  const yab = manifest.yab;
+  if (yab === undefined) return;
+  if (!yab || typeof yab !== 'object' || Array.isArray(yab)) { fail('manifest "yab" must be an object'); return; }
+  for (const key of Object.keys(yab)) if (!YAB_KEYS.has(key)) fail(`yab key "${key}" is not supported`);
+  if (yab.permissions !== undefined) {
+    if (!Array.isArray(yab.permissions)) fail('yab.permissions must be an array');
+    else for (const permission of yab.permissions) if (!PERMISSIONS.has(permission)) fail(`unknown Yab permission ${permission}`);
+  }
+  if (yab.tools !== undefined) {
+    if (!yab.tools || typeof yab.tools !== 'object' || Array.isArray(yab.tools)) fail('yab.tools must be an object of tool definitions');
+    else if (!files['tools.js'] || Object.keys(yab.tools).length > 20) fail('tool plugins need tools.js and at most 20 tool definitions');
+  }
+  for (const key of ['app', 'service']) {
+    if (yab[key] !== undefined && (typeof yab[key] !== 'string' || !(yab[key] in files))) fail(`missing plugin file for yab.${key}`);
+  }
+  if (yab.daily_limit !== undefined && !(Number.isInteger(yab.daily_limit) && yab.daily_limit >= 1 && yab.daily_limit <= 100)) fail('yab.daily_limit must be a whole number from 1 to 100');
+  if (yab.hosts !== undefined) {
+    const hosts = yab.hosts;
+    if (!Array.isArray(hosts) || !hosts.length || hosts.length > MAX_HOSTS) { fail(`yab.hosts must list one to ${MAX_HOSTS} hosts`); return; }
+    if (new Set(hosts).size !== hosts.length) fail('yab.hosts lists a host twice');
+    for (const host of hosts) {
+      if (typeof host !== 'string' || !HOST_PATTERN.test(host) || host !== host.toLowerCase()) fail(`yab.hosts: ${host} must be an exact lowercase host name, such as sponsor.ajay.app (no scheme, port, path or wildcard)`);
+      else if (/^\d+(\.\d+){3}$/.test(host)) fail(`yab.hosts: ${host} must be a name, not an IP address`);
+      else if (md?.sites.includes(host)) fail(`yab.hosts: ${host} is already one of the sites`);
+    }
+  }
+}
+
+/// review.json, written by the reviewer after reading the code: {by, date, commit?}.
+function reviewRecord(review, fail) {
+  if (!review || typeof review !== 'object' || Array.isArray(review)) { fail('review.json must be an object'); return; }
+  for (const key of Object.keys(review)) if (!REVIEW_KEYS.has(key)) fail(`review key "${key}" is not supported`);
+  if (typeof review.by !== 'string' || !review.by.trim()) fail('review.json needs by');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(review.date ?? '')) fail('review.json date must be YYYY-MM-DD');
+  if (review.commit !== undefined && !/^[0-9a-f]{7,40}$/.test(review.commit)) fail('review.json commit must be a git commit hash');
 }
 
 // ---- second review ----------------------------------------------------------
@@ -151,6 +230,12 @@ export function review(base, head = 'HEAD') {
   for (const id of git('ls-tree', '--name-only', `${base}:boosts`).split('\n').filter(Boolean)) {
     const by = json(show(base, `boosts/${id}/listing.json`))?.by;
     if (by) owners.add(by);
+  }
+  // Code always gets a second reviewer.
+  const plugins = [...new Set(changed.filter(p => p.startsWith('plugins/') && p.split('/').length > 2).map(p => p.split('/')[1]))];
+  for (const id of plugins) {
+    const paths = changed.filter(p => p.startsWith(`plugins/${id}/`));
+    if (paths.some(p => p !== `plugins/${id}/listing.json`)) reasons.push(`${id}: plugin code or metadata changed (${paths.map(p => p.slice(`plugins/${id}/`.length)).join(', ')})`);
   }
   const ids = [...new Set(changed.filter(p => p.startsWith('boosts/')).map(p => p.split('/')[1]))];
   for (const id of ids) {
@@ -181,13 +266,18 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     }
     process.exit(0);
   }
-  const ids = args.length ? args : boostIds();
+  const boosts = boostIds(), plugins = pluginIds();
+  const ids = args.length ? args : [...boosts, ...plugins];
   let failed = 0;
   for (const id of ids) {
-    if (!existsSync(join(BOOSTS, id))) { console.error(`${id}: no such boost`); failed++; continue; }
-    const problems = validate(id);
-    if (problems.length) { failed++; console.error(`${id}:\n  - ${problems.join('\n  - ')}`); }
+    const dir = existsSync(join(BOOSTS, id)) ? BOOSTS : existsSync(join(PLUGINS, id)) ? PLUGINS : null;
+    if (!dir) { console.error(`${id}: no such boost or plugin`); failed++; continue; }
+    const problems = validate(id, dir);
+    // One id names one package in the catalog.
+    if (boosts.includes(id) && plugins.includes(id)) problems.push('the same id is in boosts/ and plugins/');
+    if (problems.length) { failed++; console.error(`${dir === PLUGINS ? 'plugins/' : ''}${id}:\n  - ${problems.join('\n  - ')}`); }
   }
-  console.log(`${ids.length - failed}/${ids.length} boosts valid`);
+  const count = (list, word) => `${list.filter(id => ids.includes(id)).length} ${word}`;
+  console.log(`${ids.length - failed}/${ids.length} valid (${count(boosts, 'boosts')}, ${count(plugins, 'plugins')})`);
   process.exit(failed ? 1 : 0);
 }
