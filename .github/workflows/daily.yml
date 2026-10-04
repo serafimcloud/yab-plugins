@@ -1,8 +1,9 @@
 name: Daily check and catalog
 
+# By hand only for now: sites block checks from GitHub's servers (YouTube,
+# Reddit, npm and X answered "blocked" on 2026-10-04), so the daily run
+# belongs on a Mac at home; this stays for a manual look.
 on:
-  schedule:
-    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
