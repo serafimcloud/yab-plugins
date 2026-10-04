@@ -2,7 +2,9 @@
 
 Boosts and plugins for Yab's Store. Every listing here is checked on its live
 site, and the catalog Yab and yetanotherbrowser.com/store read is built from
-this repository.
+this repository. How to publish one, and how to build plugins with code:
+[yetanotherbrowser.com/manual/publish-a-boost](https://yetanotherbrowser.com/manual/publish-a-boost)
+and [/manual/build-plugins](https://yetanotherbrowser.com/manual/build-plugins).
 
 ```
 boosts/<id>/manifest.json    MV3: content_scripts for the named sites, css only for Look
