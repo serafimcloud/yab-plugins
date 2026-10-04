@@ -1,8 +1,8 @@
 # yab-plugins
 
 Boosts and plugins for Yab's Store. Every listing here is checked on its live
-site every day, and the catalog Yab and yetanotherbrowser.com/store read is
-built from this repository.
+site, and the catalog Yab and yetanotherbrowser.com/store read is built from
+this repository.
 
 ```
 boosts/<id>/manifest.json    MV3: content_scripts for the named sites, css only for Look
@@ -109,6 +109,7 @@ hours. A boost that fails on two checked days running shows "Needs Fix"
 `{"payload": {"files", "format": 1, "id", "sites"}, "revision"}` where the
 revision is the sha256 of the canonical payload (sorted keys, no spaces, raw
 UTF-8), the bytes Yab's `BoostShare.read` verifies. The payload carries every
-file of the boost except `listing.json`. The daily workflow publishes `out/`
-to the `catalog` branch, with `state/history.json` for the next day's run;
-fast-web serves it and fills in `kept`.
+file of the boost except `listing.json`. The daily run (on a Mac:
+sites block GitHub's servers) publishes `out/` to the `catalog` branch, with
+`state/history.json` for the next day's run; fast-web serves it and fills in
+`kept`.
