@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Tools",
+  "version": "1.0.0",
+  "description": "Agent tools for public GitHub repositories: reviews waiting, CI status and prefilled issues.",
+  "yab": {
+    "tools": {
+      "prs_needing_review": {
+        "description": "List open pull requests in public repositories that wait for this GitHub user's review, and the user's own open pull requests still waiting for a review.",
+        "params": { "user": "string", "limit": "integer?" }
+      },
+      "ci_status": {
+        "description": "Tell whether the latest commit on a public repository's branch (its default branch unless named) passes CI, with failing and running checks.",
+        "params": { "repo": "string", "branch": "string?" }
+      },
+      "draft_issue": {
+        "description": "Make a github.com link that opens a new issue in a public repository with the title, body and labels filled in. The person presses Create on GitHub; nothing is filed by the tool.",
+        "params": { "repo": "string", "title": "string", "body": "string?", "labels": "array?" }
+      }
+    },
+    "daily_limit": 20
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Hacker News Mentions",
+  "version": "1.0.0",
+  "description": "Tells you when a new Hacker News story or comment mentions the words you watch.",
+  "yab": {
+    "permissions": ["yab:task"],
+    "app": "app/index.html",
+    "service": "service.js",
+    "every": "30m",
+    "daily_limit": 10
+  }
+}

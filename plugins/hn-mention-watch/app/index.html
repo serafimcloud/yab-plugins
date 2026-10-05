@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<title>Hacker News Mentions</title>
+<link rel="stylesheet" href="style.css">
+<main>
+  <h1>Hacker News Mentions</h1>
+  <p class="sub">Searches every 30 minutes. Yab tells you about new stories and comments that mention these words.</p>
+  <p class="note" id="note" hidden></p>
+  <form id="add">
+    <input id="field" placeholder="A word or a short phrase" autocomplete="off" spellcheck="false" aria-label="Word to watch">
+    <button type="submit">Watch</button>
+  </form>
+  <p class="hint" id="hint"></p>
+  <div class="words" id="words"></div>
+  <h2 id="recent-title" hidden>Found lately</h2>
+  <ul id="list"></ul>
+  <p class="empty" id="empty" hidden>No words yet. Add your product's name, your name or a topic.</p>
+</main>
+<script src="app.js"></script>

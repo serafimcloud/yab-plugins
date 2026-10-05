@@ -1,0 +1,9 @@
+{
+  "name": "GitHub Tools",
+  "intent": "Give my agent quick, read-only answers about public GitHub repositories: which pull requests wait for my review, whether a repository's main branch is green, and a prefilled new-issue link I can submit myself.",
+  "host": "api.github.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://api.github.com/repos/oven-sh/bun",
+  "added": "2026-10-04"
+}

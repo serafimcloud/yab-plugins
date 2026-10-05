@@ -1,0 +1,17 @@
+{
+  "actions": [
+    {
+      "id": "search",
+      "name": "Search Hacker News",
+      "url": "https://hn.algolia.com/?sort=byDate"
+    }
+  ],
+  "routines": [
+    {
+      "id": "morning-brief",
+      "name": "Morning Brief",
+      "when": "weekdays 9:00",
+      "prompt": "Morning brief from Hacker News. Read the words I watch on yab://hn-mention-watch.boost/app/index.html. From https://hn.algolia.com/api/v1/search?tags=front_page list the five front page stories with the most points, one line each. Then, for each watched word, list stories and comments from the last 24 hours that mention it (https://hn.algolia.com/api/v1/search_by_date?query=<word>&tags=(story,comment)&numericFilters=created_at_i><unix time 24 hours ago>), one line each with who said it and the news.ycombinator.com/item?id= link. On Mondays cover the weekend too. If nothing mentions my words, say so in one line. Never post, reply or vote."
+    }
+  ]
+}

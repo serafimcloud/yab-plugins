@@ -1,0 +1,17 @@
+{
+  "commands": [
+    {
+      "id": "watch-this-repo",
+      "name": "Watch This Repository",
+      "prompt": "The current tab is on github.com. Find the repository as owner/name from the address, open yab://github-release-watch.boost/app/index.html?add=<owner/name> so GitHub Release Watch adds it, and say which repository is now watched. If the tab is not a GitHub repository, say so and stop."
+    }
+  ],
+  "routines": [
+    {
+      "id": "morning-brief",
+      "name": "Morning Brief",
+      "when": "weekdays 9:00",
+      "prompt": "Morning brief of GitHub releases. Read the repositories I watch on yab://github-release-watch.boost/app/index.html. For each one, read https://api.github.com/repos/<owner>/<name>/releases?per_page=5 and list releases published in the last 24 hours (on Mondays, since Friday morning): repository, version and one line on what changed, with the release link. Group pre-releases at the end. If nothing was released, say so in one line. Do not star, comment or open issues."
+    }
+  ]
+}

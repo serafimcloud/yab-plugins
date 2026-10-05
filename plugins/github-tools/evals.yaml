@@ -1,0 +1,15 @@
+- ask: "Which pull requests are waiting for my review? I'm gaearon on GitHub"
+  tool: prs_needing_review
+  args: {"user":"gaearon"}
+- ask: "Do I have PRs nobody has reviewed yet? My login is sindresorhus"
+  tool: prs_needing_review
+  args: {"user":"sindresorhus","limit":5}
+- ask: "Is bun's main branch green?"
+  tool: ci_status
+  args: {"repo":"oven-sh/bun"}
+- ask: "Did CI pass on the canary branch of next.js?"
+  tool: ci_status
+  args: {"repo":"vercel/next.js","branch":"canary"}
+- ask: "File an issue on astral-sh/uv saying uv sync hangs behind a proxy"
+  tool: draft_issue
+  args: {"repo":"astral-sh/uv","title":"uv sync hangs behind an HTTP proxy","body":"uv sync stops at Resolving dependencies when HTTPS_PROXY is set. Steps to reproduce and logs below."}

@@ -1,0 +1,16 @@
+<meta charset="utf-8">
+<title>GitHub Release Watch</title>
+<link rel="stylesheet" href="style.css">
+<main>
+  <h1>GitHub Release Watch</h1>
+  <p class="sub">Checks every hour. Yab tells you what is new when a repository publishes a release.</p>
+  <p class="note" id="note" hidden></p>
+  <form id="add">
+    <input id="field" placeholder="owner/repo or a GitHub link" autocomplete="off" spellcheck="false" aria-label="Repository">
+    <button type="submit">Watch</button>
+  </form>
+  <p class="hint" id="hint"></p>
+  <ul id="list"></ul>
+  <p class="empty" id="empty" hidden>Nothing watched yet. Add a repository such as oven-sh/bun.</p>
+</main>
+<script src="app.js"></script>

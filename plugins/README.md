@@ -2,8 +2,8 @@
 
 Boosts with code: the Page, Tool and App rungs. A folder here has the same
 files as a boost in `boosts/` plus its code: `page/page.js` (a script on the
-named sites), `checks.js` (checks that need code), `tools.js`, `skills/`,
-`commands.json`. Look boosts (CSS only) go in `boosts/`.
+named sites), `checks.js` (checks that need code), `tools.js`, `service.js`,
+`app/`, `skills/`, `commands.json`. Look boosts (CSS only) go in `boosts/`.
 
 ## Rules
 
@@ -60,6 +60,16 @@ tried on a saved page in `scripts/fixtures/` served at the real address, and
 the result says so. Results go to `out/results.json` like `check.mjs`'s, and
 pictures to `out/pictures/<id>/`.
 
+Services, tools and app pages are tried with `scripts/try-service.mjs`:
+service ticks with storage carried over and fixtures to stage a change, tools
+against their live API, and pictures of app pages:
+
+```sh
+node scripts/try-service.mjs hn-mention-watch --ticks 2 --storage '{"words":["webkit"]}'
+node scripts/try-service.mjs github-tools --evals
+node scripts/try-service.mjs github-release-watch --storage '{"repos":[{"repo":"oven-sh/bun"}]}' --shot out/app.png
+```
+
 ## Plugins here
 
 | Plugin | What it does | Talks to |
@@ -74,3 +84,7 @@ pictures to `out/pictures/<id>/`.
 | `feed-pause` | Five seconds before the X, YouTube or Reddit feed, once per 30 minutes per site | |
 | `google-domain-blocklist` | Hides results from listed sites, edited from a pill on the results page | |
 | `absolute-dates` | Real dates beside "3 weeks ago" on Reddit and YouTube videos | |
+| `amazon-price-watch` | Hourly price and stock check of watched Amazon items, a notification on a 10% drop | |
+| `github-release-watch` | New releases of watched repositories, with what's new | |
+| `hn-mention-watch` | New Hacker News stories and comments that name the watched words | |
+| `github-tools` | Tools for agents: reviews waiting, CI status, prefilled issues on public repos | |

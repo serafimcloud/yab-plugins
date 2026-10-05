@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Amazon Price Watch",
+  "version": "1.0.0",
+  "description": "Watches Amazon products and tells you when a price falls 10% or a product is back in stock.",
+  "yab": {
+    "permissions": ["yab:task"],
+    "app": "app/index.html",
+    "service": "service.js",
+    "every": "1h",
+    "daily_limit": 5
+  }
+}
