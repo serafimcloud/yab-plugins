@@ -1,8 +1,14 @@
 #!/usr/bin/env node
-// Builds the Store catalog (docs/store.md in the Yab repo) from boosts/, the
-// latest check results and the check history.
+// Builds the Store catalog (docs/store.md in the Yab repo) from boosts/ and
+// plugins/, the latest check results and the check history.
 //
-//   node scripts/catalog.mjs [--out out] [--history state/history.json]
+//   node scripts/catalog.mjs [--out out] [--history state/history.json] [--unreviewed]
+//
+// Plugins (code: the Page, Tool and App rungs) are listed only with a
+// review.json ({by, date}, written by the person who read the code), which
+// becomes the item's `reviewed`. --unreviewed lists the others too, with
+// `reviewed: null`, for trying the catalog locally; Yab installs code only
+// from reviewed items.
 //
 // Writes:
 //   out/catalog.json                    format 1, one item per boost
@@ -17,21 +23,23 @@
 import { execFileSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, extname, join, resolve } from 'node:path';
-import { ROOT, boostIds, canonical, displayHost, envelopeOf, readBoost, rightsOf, rungOf } from './lib/boosts.mjs';
+import { BOOSTS, PLUGINS, ROOT, boostIds, canonical, displayHost, envelopeOf, hostsOf, pluginIds, readBoost, rightsOf, rungOf } from './lib/boosts.mjs';
 
 const args = process.argv.slice(2);
 const option = (name, fallback) => { const i = args.indexOf(name); return i < 0 ? fallback : args[i + 1]; };
 const OUT = resolve(ROOT, option('--out', 'out'));
 const HISTORY = resolve(ROOT, option('--history', 'state/history.json'));
 const KEEP_DAYS = 30;
+const UNREVIEWED = args.includes('--unreviewed');
 
 const iso = date => date.toISOString().replace(/\.\d{3}Z$/, 'Z');
 const readJson = (path, fallback) => (existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : fallback);
 const git = (...a) => { try { return execFileSync('git', a, { cwd: ROOT, encoding: 'utf8' }).trim(); } catch { return ''; } };
 
-/// Commits that touched a boost, oldest first: {commit, date, note}.
-function versionsOf(id) {
-  const lines = git('log', '--abbrev=7', '--format=%h%x09%as%x09%s', '--', `boosts/${id}`).split('\n').filter(Boolean).reverse();
+/// Commits that touched a boost (folder boosts/<id> or plugins/<id>), oldest
+/// first: {commit, date, note}. A plugin's review.json is not a version.
+function versionsOf(id, folder = `boosts/${id}`) {
+  const lines = git('log', '--abbrev=7', '--format=%h%x09%as%x09%s', '--', folder, `:!${folder}/review.json`).split('\n').filter(Boolean).reverse();
   return lines.map((line, i) => {
     const [commit, date, ...subject] = line.split('\t');
     return { commit, date, note: i === 0 ? 'First version' : subject.join('\t') };
@@ -39,9 +47,9 @@ function versionsOf(id) {
 }
 
 /// The last date after the first version when the boost's page files changed.
-function fixedOf(id, versions) {
+function fixedOf(id, versions, folder = `boosts/${id}`) {
   if (versions.length < 2) return null;
-  const changed = new Set(git('log', '--abbrev=7', '--format=%h', '--', `boosts/${id}/page`).split('\n').filter(Boolean));
+  const changed = new Set(git('log', '--abbrev=7', '--format=%h', '--', `${folder}/page`).split('\n').filter(Boolean));
   const later = versions.slice(1).filter(v => changed.has(v.commit));
   return later.length ? later[later.length - 1].date : null;
 }
@@ -65,15 +73,20 @@ function checkOf(id, result, record) {
 function main() {
   const results = readJson(join(OUT, 'results.json'), {});
   const history = readJson(HISTORY, {});
-  const ids = boostIds();
-  if (git('status', '--porcelain', '--', 'boosts')) console.warn('warning: boosts/ has uncommitted changes; commits and versions describe the last commit');
+  const entries = [...boostIds().map(id => ({ id, dir: BOOSTS, source: `boosts/${id}` })), ...pluginIds().map(id => ({ id, dir: PLUGINS, source: `plugins/${id}` }))];
+  if (git('status', '--porcelain', '--', 'boosts', 'plugins')) console.warn('warning: boosts/ or plugins/ has uncommitted changes; commits and versions describe the last commit');
+  const unreviewed = [];
 
   rmSync(join(OUT, 'b'), { recursive: true, force: true });
   rmSync(join(OUT, 'store', 'p'), { recursive: true, force: true });
   const items = [];
-  for (const id of ids) {
-    const boost = readBoost(id);
+  for (const { id, dir, source } of entries) {
+    const boost = readBoost(id, dir);
     const { listing, manifest, boost: md } = boost;
+    if (boost.plugin && !boost.review) {
+      unreviewed.push(id);
+      if (!UNREVIEWED) continue;
+    }
     const result = results[id];
 
     const record = history[id] ?? { days: {}, lastWorks: null };
@@ -102,8 +115,16 @@ function main() {
       }
     }
 
-    const versions = versionsOf(id);
+    const versions = versionsOf(id, source);
     const rung = rungOf(manifest, boost.files);
+    const hosts = hostsOf(manifest);
+    // The commit the reviewer read: named in review.json, else the last
+    // change to the plugin's own files.
+    const reviewed = !boost.plugin ? undefined : boost.review ? {
+      by: boost.review.by,
+      date: boost.review.date,
+      commit: boost.review.commit ?? (versions.length ? versions[versions.length - 1].commit : null),
+    } : null;
     items.push({
       id,
       name: listing.name,
@@ -111,13 +132,14 @@ function main() {
       sites: md.sites,
       host: listing.host ?? displayHost(md.sites[0]),
       rung,
-      rights: rightsOf(rung, md.sites.map(displayHost)),
+      rights: rightsOf(rung, md.sites.map(displayHost), hosts),
+      ...(reviewed === undefined ? {} : { reviewed }),
       revision: envelope.revision,
       commit: versions.length ? versions[versions.length - 1].commit : null,
       by: listing.by,
       picks: listing.picks === true,
       added: listing.added,
-      fixed: fixedOf(id, versions),
+      fixed: fixedOf(id, versions, source),
       check: checkOf(id, result, record),
       kept: null,
       pictures,
@@ -134,6 +156,7 @@ function main() {
     writeFileSync(path, JSON.stringify(sortedHistory, null, 2) + '\n');
   }
   const counts = items.reduce((n, item) => ({ ...n, [item.check.state]: (n[item.check.state] ?? 0) + 1 }), {});
+  if (unreviewed.length) console.log(`${UNREVIEWED ? 'listed without review' : 'not listed, no review.json'}: ${unreviewed.join(', ')}`);
   console.log(`catalog.json: ${items.length} items (${Object.entries(counts).map(([k, v]) => `${v} ${k}`).join(', ')}), ${items.length} packages in ${join(OUT, 'b')}`);
 }
 

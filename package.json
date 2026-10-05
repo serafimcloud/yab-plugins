@@ -10,6 +10,7 @@
     "validate": "node scripts/validate.mjs",
     "check": "node scripts/check.mjs",
     "catalog": "node scripts/catalog.mjs",
+    "try": "node scripts/try-plugin.mjs",
     "test": "node scripts/validate.mjs"
   },
   "dependencies": {

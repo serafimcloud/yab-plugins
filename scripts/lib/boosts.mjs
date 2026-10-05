@@ -8,6 +8,10 @@ import { fileURLToPath } from 'node:url';
 
 export const ROOT = fileURLToPath(new URL('../..', import.meta.url));
 export const BOOSTS = join(ROOT, 'boosts');
+/// Code (Page, Tool, App rungs): reviewed releases only.
+export const PLUGINS = join(ROOT, 'plugins');
+/// Files a plugin folder keeps for the store, outside the package.
+export const STORE_ONLY = new Set(['listing.json', 'review.json']);
 export const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const HOST_PATTERN = /^(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*$/;
 
@@ -26,15 +30,16 @@ export function canonical(value) {
 
 export const sha256 = text => createHash('sha256').update(Buffer.from(text, 'utf8')).digest('hex');
 
-/// Every boost id in boosts/, sorted.
-export function boostIds() {
-  if (!existsSync(BOOSTS)) return [];
-  return readdirSync(BOOSTS).filter(name => !name.startsWith('.') && statSync(join(BOOSTS, name)).isDirectory()).sort();
+/// Every boost id in boosts/ (or plugin id in plugins/), sorted.
+export function boostIds(dir = BOOSTS) {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir).filter(name => !name.startsWith('.') && statSync(join(dir, name)).isDirectory()).sort();
 }
+export const pluginIds = () => boostIds(PLUGINS);
 
 /// Every file in a boost folder, as {"relative/path": text}, sorted by path.
-export function folderFiles(id) {
-  const base = join(BOOSTS, id), files = {};
+export function folderFiles(id, dir = BOOSTS) {
+  const base = join(dir, id), files = {};
   const walk = dir => {
     for (const name of readdirSync(dir).sort()) {
       const path = join(dir, name);
@@ -109,17 +114,23 @@ export function rungOf(manifest, files) {
   const permissions = yab.permissions ?? [];
   const sites = matchHosts(manifest);
   if (sites.includes('<all_urls>') || files['commands.json'] || yab.app || yab.service || permissions.some(p => p !== 'yab:ask')) return 'App';
-  if ((yab.tools ?? []).length || permissions.length || Object.keys(files).some(p => p.startsWith('skills/'))) return 'Tool';
-  if (scripts.every(s => !(s.js ?? []).length) && !files['checks.js'] && !Object.keys(files).some(p => p.endsWith('.js'))) return 'Look';
+  if (Object.keys(yab.tools ?? {}).length || permissions.length || Object.keys(files).some(p => p.startsWith('skills/'))) return 'Tool';
+  // Hosts make a package at least Page: it has code to use them.
+  if (scripts.every(s => !(s.js ?? []).length) && !files['checks.js'] && !Object.keys(files).some(p => p.endsWith('.js')) && !hostsOf(manifest).length) return 'Look';
   return 'Page';
 }
 
-/// The Keep card's words, from store.md (Look: "No code runs.").
-export function rightsOf(rung, sites) {
+/// The Keep card's words, from store.md (Look: "No code runs."), with the
+/// other hosts a plugin talks to ("Talks to sponsor.ajay.app.").
+export function rightsOf(rung, sites, hosts = []) {
   const list = sites.join(', ');
   if (sites.includes('<all_urls>')) return 'Read and change every site you visit.';
-  return rung === 'Look' ? `Change how ${list} looks. No code runs.` : `Run code on ${list}. It can read and change these pages.`;
+  if (rung === 'Look') return `Change how ${list} looks. No code runs.`;
+  return `Run code on ${list}. It can read and change these pages.` + (hosts.length ? ` Talks to ${hosts.join(', ')}.` : '');
 }
+
+/// The hosts beyond its sites that a plugin's fetch may reach (yab.hosts).
+export const hostsOf = manifest => (Array.isArray(manifest?.yab?.hosts) ? manifest.yab.hosts : []);
 
 export function matchHosts(manifest) {
   const hosts = [];
@@ -135,24 +146,28 @@ export function matchHosts(manifest) {
 
 export const displayHost = site => (site.startsWith('www.') ? site.slice(4) : site);
 
-/// Reads one boost folder into everything the scripts need.
-export function readBoost(id) {
-  const base = join(BOOSTS, id);
-  const files = folderFiles(id);
+/// Reads one boost folder (or plugin folder, with dir = PLUGINS) into
+/// everything the scripts need.
+export function readBoost(id, dir = BOOSTS) {
+  const base = join(dir, id);
+  const files = folderFiles(id, dir);
   const manifest = JSON.parse(files['manifest.json'] ?? 'null');
   const boost = parseBoostMd(files['BOOST.md'] ?? '');
   const listing = JSON.parse(files['listing.json'] ?? 'null');
+  const review = files['review.json'] === undefined ? null : JSON.parse(files['review.json']);
   const css = (manifest?.content_scripts ?? []).flatMap(s => s.css ?? []).map(path => files[path] ?? '').join('\n');
-  return { id, base, files, manifest, boost, listing, css };
+  const js = (manifest?.content_scripts ?? []).flatMap(s => s.js ?? []).map(path => files[path] ?? '').join('\n;\n');
+  return { id, base, plugin: dir === PLUGINS, files, manifest, boost, listing, review, css, js };
 }
 
 /// The files that travel in a package: everything the boost needs to run and
 /// be read again (manifest, BOOST.md, the files the manifest names, checks.js
-/// and plugin folders). listing.json stays in the store; it is not the boost.
+/// and plugin folders). listing.json and review.json stay in the store; they
+/// are not the boost, and a review names the revision it read.
 export function packageFiles(files) {
   const out = {};
   for (const [path, text] of Object.entries(files)) {
-    if (path === 'listing.json' || path.startsWith('.') || path.split('/').some(part => part.startsWith('.'))) continue;
+    if (STORE_ONLY.has(path) || path.startsWith('.') || path.split('/').some(part => part.startsWith('.'))) continue;
     out[path] = text;
   }
   return out;

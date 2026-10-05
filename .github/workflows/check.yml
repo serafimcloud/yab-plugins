@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'boosts/**'
+      - 'plugins/**'
       - 'scripts/**'
       - 'package.json'
       - 'package-lock.json'

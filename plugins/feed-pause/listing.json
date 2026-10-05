@@ -1,0 +1,9 @@
+{
+  "name": "Feed Pause",
+  "intent": "Before X, YouTube or Reddit shows me its feed, show a calm pause screen for five seconds, then let me choose Open anyway. Do it at most once every 30 minutes on each site.",
+  "host": "x.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.reddit.com/",
+  "added": "2026-10-04"
+}

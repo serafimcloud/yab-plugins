@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Stand-in: YouTube's "Continue watching?"</title></head>
+<body>
+<!-- The markup YouTube uses for its idle prompt, without YouTube's code. -->
+<div id="movie_player"><video muted></video></div>
+<ytd-popup-container>
+  <tp-yt-paper-dialog id="other-dialog">
+    <yt-confirm-dialog-renderer style="display:block">
+      <div id="main"><yt-formatted-string>Remove from playlist?</yt-formatted-string></div>
+      <div id="confirm-button"><button>Remove</button></div>
+    </yt-confirm-dialog-renderer>
+  </tp-yt-paper-dialog>
+  <tp-yt-paper-dialog id="idle-dialog">
+    <yt-confirm-dialog-renderer style="display:block">
+      <div id="main"><yt-formatted-string>Video paused. Continue watching?</yt-formatted-string></div>
+      <div id="buttons">
+        <div id="cancel-button"><button>No</button></div>
+        <div id="confirm-button"><button id="yes">Yes</button></div>
+      </div>
+    </yt-confirm-dialog-renderer>
+  </tp-yt-paper-dialog>
+</ytd-popup-container>
+<script>
+  window.confirmed = false;
+  document.getElementById('yes').addEventListener('click', () => {
+    window.confirmed = true;
+    document.getElementById('idle-dialog').remove();
+  });
+  document.querySelector('#other-dialog button').addEventListener('click', () => document.getElementById('other-dialog').remove());
+</script>
+</body>
+</html>

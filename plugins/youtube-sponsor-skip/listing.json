@@ -1,0 +1,9 @@
+{
+  "name": "Skip Sponsors",
+  "intent": "Skip sponsor segments, intros, outros and self-promotion in YouTube videos, using SponsorBlock's public list, and say briefly what was skipped.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.youtube.com/watch?v=1gxnANAbLuE",
+  "added": "2026-10-04"
+}

@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Quiet Replies",
+  "version": "1.0.0",
+  "description": "Folds replies from paid blue-check accounts and number-suffixed handles on X into one \"N hidden\" line.",
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*"],
+      "css": ["page/style.css"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

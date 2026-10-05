@@ -1,0 +1,21 @@
+/* While Yab picks the quality, YouTube's settings menu stays out of sight. */
+#movie_player.yab-defaults-busy .ytp-settings-menu,
+#movie_player.yab-defaults-busy .ytp-popup {
+  opacity: 0 !important;
+}
+.yab-defaults-speed {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  z-index: 70;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(15, 15, 15, 0.8);
+  color: #fff;
+  font: 500 16px/1 Roboto, Arial, sans-serif;
+  pointer-events: none;
+}
+.yab-defaults-speed[hidden] {
+  display: none;
+}

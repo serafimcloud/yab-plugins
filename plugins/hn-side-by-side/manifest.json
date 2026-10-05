@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Article and Comments",
+  "version": "1.0.0",
+  "description": "On Hacker News, the article one click from its comments, a read-later list, and new comments marked since your last visit.",
+  "content_scripts": [
+    {
+      "matches": ["https://news.ycombinator.com/*"],
+      "css": ["page/style.css"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

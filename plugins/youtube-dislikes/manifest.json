@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Dislike Counts",
+  "version": "1.0.0",
+  "description": "Shows an estimated dislike count beside YouTube's dislike button, from Return YouTube Dislike.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": ["page/style.css"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "yab": {
+    "hosts": ["returnyoutubedislikeapi.com"]
+  }
+}

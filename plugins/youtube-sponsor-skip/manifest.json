@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Skip Sponsors",
+  "version": "1.0.0",
+  "description": "Skips sponsor reads, intros, outros and self-promotion on YouTube, using SponsorBlock's community segments.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": ["page/style.css"],
+      "js": ["page/page.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "yab": {
+    "hosts": ["sponsor.ajay.app"]
+  }
+}

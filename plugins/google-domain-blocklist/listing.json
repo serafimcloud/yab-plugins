@@ -1,0 +1,9 @@
+{
+  "name": "Blocked Sites",
+  "intent": "Hide Google search results from sites I don't want to see. Give me a small pill on the results page to add or remove sites, kept on this Mac.",
+  "host": "google.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.google.com/search?q=python+list+comprehension",
+  "added": "2026-10-04"
+}

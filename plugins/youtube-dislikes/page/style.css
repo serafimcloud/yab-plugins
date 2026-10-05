@@ -1,0 +1,9 @@
+dislike-button-view-model button:has(.yab-dislikes) {
+  width: auto;
+  padding: 0 14px 0 10px;
+  gap: 6px;
+}
+.yab-dislikes {
+  font: 500 14px/1 Roboto, Arial, sans-serif;
+  white-space: nowrap;
+}

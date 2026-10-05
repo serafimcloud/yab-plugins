@@ -1,0 +1,102 @@
+.yab-feed-pause {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  background: #f6f5f1;
+  color: #1d1d1f;
+  font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+.yab-feed-pause h1 {
+  margin: 0;
+  color: inherit;
+  line-height: 1.2;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.yab-feed-pause p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  max-width: 34em;
+  color: #6e6e73;
+}
+.yab-feed-pause .yab-feed-breath {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #d9d5ff;
+  animation: yab-feed-breathe 5s ease-in-out infinite;
+}
+@keyframes yab-feed-breathe {
+  0%, 100% { transform: scale(0.72); opacity: 0.55; }
+  50% { transform: scale(1); opacity: 1; }
+}
+.yab-feed-pause .yab-feed-actions {
+  display: flex;
+  gap: 10px;
+}
+.yab-feed-pause button {
+  /* The sites' own button styles stop here. */
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  min-width: 150px;
+  margin: 0;
+  padding: 0 18px;
+  line-height: 1.2;
+  text-transform: none;
+  border: 1px solid #d2d2d7;
+  border-radius: 999px;
+  background: #fff;
+  color: #1d1d1f;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.yab-feed-pause button.yab-feed-open:disabled {
+  color: #a1a1a6;
+  cursor: default;
+}
+.yab-feed-pause button.yab-feed-open:not(:disabled) {
+  border-color: #1d1d1f;
+  background: #1d1d1f;
+  color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  .yab-feed-pause {
+    background: #161618;
+    color: #f5f5f7;
+  }
+  .yab-feed-pause p {
+    color: #a1a1a6;
+  }
+  .yab-feed-pause .yab-feed-breath {
+    background: #4b3fb3;
+  }
+  .yab-feed-pause button {
+    border-color: #3a3a3c;
+    background: #232326;
+    color: #f5f5f7;
+  }
+  .yab-feed-pause button.yab-feed-open:not(:disabled) {
+    border-color: #f5f5f7;
+    background: #f5f5f7;
+    color: #161618;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .yab-feed-pause .yab-feed-breath {
+    animation: none;
+  }
+}

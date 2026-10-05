@@ -1,0 +1,9 @@
+{
+  "name": "No Autoplay",
+  "intent": "On YouTube, play only what I start: don't play channel trailers on their own, don't play previews when I hover over a video, and don't go on to the next video when one ends.",
+  "host": "youtube.com",
+  "by": "Yab",
+  "picks": false,
+  "preview": "https://www.youtube.com/@mkbhd",
+  "added": "2026-10-04"
+}

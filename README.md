@@ -12,8 +12,10 @@ boosts/<id>/BOOST.md         name, sites, made, preview, checks, then the intent
 boosts/<id>/page/style.css   the Look itself
 boosts/<id>/listing.json     the store's words: name, intent, host, by, picks, preview, added
 plugins/<id>/                code (Page, Tool, App rungs), reviewed releases only
+plugins/<id>/review.json     {by, date}: added by the reviewer; lists the plugin
 scripts/validate.mjs         the rules below, run on every pull request
 scripts/check.mjs            Playwright WebKit: checks before and after, pictures
+scripts/try-plugin.mjs       the same for plugins: the code on its live page
 scripts/catalog.mjs          out/catalog.json, out/b/<revision>/package.boost, out/store/p/
 ```
 
@@ -26,6 +28,7 @@ npm run validate                     # every boost, or: node scripts/validate.mj
 npm run check                        # every boost on its live page
 node scripts/check.mjs hn-readable   # some boosts
 node scripts/check.mjs --changed origin/main...HEAD
+node scripts/try-plugin.mjs feed-pause  # plugins (npm run try for all)
 npm run catalog                      # after check: out/catalog.json and packages
 ```
 
@@ -102,7 +105,8 @@ hours. A boost that fails on two checked days running shows "Needs Fix"
   to CODEOWNERS or workflows, get the `second review needed` label and need a
   second reviewer.
 - Code (Page, Tool, App) is shared only through a reviewed release in
-  `plugins/`, never as a listing in `boosts/`.
+  `plugins/`, never as a listing in `boosts/`. See
+  [plugins/README.md](plugins/README.md).
 
 ## Catalog and packages
 
