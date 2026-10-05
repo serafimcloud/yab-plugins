@@ -120,13 +120,38 @@ export function rungOf(manifest, files) {
   return 'Page';
 }
 
-/// The Keep card's words, from store.md (Look: "No code runs."), with the
-/// other hosts a plugin talks to ("Talks to sponsor.ajay.app.").
-export function rightsOf(rung, sites, hosts = []) {
-  const list = sites.join(', ');
-  if (sites.includes('<all_urls>')) return 'Read and change every site you visit.';
-  if (rung === 'Look') return `Change how ${list} looks. No code runs.`;
-  return `Run code on ${list}. It can read and change these pages.` + (hosts.length ? ` Talks to ${hosts.join(', ')}.` : '');
+/// What each `yab:` permission lets a plugin do (BoostPackage.rights in Yab).
+export const RIGHTS = {
+  'yab:task': 'start agent tasks', 'yab:ask': 'use your AI plan', 'yab:memory': 'use details you share',
+  'yab:calendar': 'read your next meeting', 'yab:live': 'add live folders', 'yab:rows': 'suggest links on New Tab',
+  'yab:notify': 'show notifications', 'yab:route': 'plan routes', 'yab:summarize': 'summarize pages of its site',
+  'yab:translate': 'translate text on this Mac',
+};
+const list = words => (words.length < 2 ? words.join('') : words.slice(0, -1).join(', ') + ' and ' + words[words.length - 1]);
+
+/// The Keep card's words, built as BoostPackage.permission builds them in Yab
+/// (Look: "No code runs."), with the other hosts a plugin talks to
+/// ("Talks to sponsor.ajay.app."). `manifest` and `files` add the plugin's
+/// tools, permissions, service, commands and AI limit.
+export function rightsOf(rung, sites, hosts = [], manifest = null, files = {}) {
+  const names = sites.join(', ');
+  if (sites.includes('<all_urls>')) return 'Read and change every site you visit. Skipped on detected sign-in and payment pages, private tabs and Developer Mode.';
+  if (rung === 'Look') return `Change how ${names} looks. No code runs.`;
+  const yab = manifest?.yab ?? {};
+  const permissions = Array.isArray(yab.permissions) ? yab.permissions : [];
+  const tools = Object.keys(yab.tools ?? {}).length;
+  const can = permissions.map(p => RIGHTS[p]).filter(Boolean);
+  const commands = 'commands.json' in files;
+  const ai = permissions.includes('yab:task') || permissions.includes('yab:ask') || commands;
+  const every = yab.service ? /^([1-9][0-9]*)(m|h|d)$/.exec(yab.every ?? '') : null;
+  const minutes = every ? Number(every[1]) * { m: 1, h: 60, d: 1440 }[every[2]] : null;
+  return `Run code on ${names}. It can read and change these pages.`
+    + (tools ? ` Adds ${tools} agent tools.` : '')
+    + (can.length ? ` Can ${list(can)}.` : '')
+    + (minutes ? ` Checks public data every ${minutes} minutes.` : '')
+    + (commands ? ' Adds commands, quick actions or routines to Settings.' : '')
+    + (ai ? ` Up to ${Number.isInteger(yab.daily_limit) ? yab.daily_limit : 20} AI calls a day.` : '')
+    + (hosts.length ? ` Talks to ${hosts.join(', ')}.` : '');
 }
 
 /// The hosts beyond its sites that a plugin's fetch may reach (yab.hosts).

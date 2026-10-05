@@ -32,6 +32,8 @@ A plugin reaches the Store only when a person has read its code: they add
 ```
 
 with `commit` optional (the last commit that changed the plugin otherwise).
+`by` says honestly who read it; a review by an AI says so, as in
+`"Claude (AI review)"`, and still wants a person's second review.
 `catalog.mjs` lists a plugin only with a review; its item carries `rung`,
 `rights` (the Keep card's words, with "Talks to <hosts>." for `yab.hosts`)
 and `reviewed`. `review.json` and `listing.json` stay out of the package, so
@@ -39,6 +41,10 @@ the reviewed revision is the one Yab installs. Any change to a plugin's files
 needs a second reviewer. `node scripts/catalog.mjs --unreviewed` lists the
 others too (`reviewed: null`) for trying the catalog locally; Yab does not
 install them.
+
+Plugins with no page scripts (a service, tools or an app page) have no page
+for the daily check: the catalog lists them as unchecked, "no page to
+check", and `scripts/try-service.mjs` tries them.
 
 ## Trying a plugin
 

@@ -152,7 +152,7 @@ function discussion() {
 function lists() {
   const seen = read('seen', {});
   for (const link of document.querySelectorAll('td.subtext a[href^="item?id="]')) {
-    const match = /^(\d+)\s*comments?$/.exec(link.textContent.replace(/ /g, ' ').trim());
+    const match = /^(\d+)\s*comments?$/.exec(link.textContent.replace(/\u00a0/g, ' ').trim());
     const id = new URLSearchParams(link.getAttribute('href').split('?')[1]).get('id');
     const visit = seen[id];
     if (!match || !visit) continue;

@@ -65,9 +65,14 @@ function codeProblems(path, text) {
   if (dynamic >= 0) problems.push(`${path}:${dynamic + 1}: eval, new Function and import() are not allowed (also in comments and strings)`);
   if (DYNAMIC_CODE.test(text) && dynamic < 0) problems.push(`${path}: eval, new Function or import() across lines`);
   // Page scripts and checks run as the body of function(boost) { ... }.
+  // Services and tools are modules: Yab drops `export` before declarations
+  // (BoostServices, BoostToolRuntime) and runs them in a blank page.
   if (path.endsWith('.js') && !path.endsWith('.mjs')) {
-    try { new Script('(function (boost) {\n' + text + '\n})', { filename: path }); }
+    const module = path === 'service.js' || path === 'tools.js';
+    const code = module ? text.replace(/\bexport\s+(?=(?:const|let|var|async\s+function|function)\s)/g, '') : text;
+    try { new Script('(async function (boost) {\n' + code + '\n})', { filename: path }); }
     catch (error) { problems.push(`${path}: does not parse: ${error.message}`); }
+    if (module && /\bexport\b/.test(code)) problems.push(`${path}: export only before const, let, var or function declarations`);
   }
   return problems;
 }
@@ -98,7 +103,11 @@ export function validate(id, dir = BOOSTS) {
   if (typeof manifest.version !== 'string' || !/^\d+(\.\d+){0,3}$/.test(manifest.version)) fail('manifest needs a version like 1.0.0');
   for (const key of Object.keys(manifest)) if (!MANIFEST_KEYS.has(key)) fail(`manifest key "${key}" is not supported; declare plugin capabilities under "yab"`);
   const scripts = manifest.content_scripts;
-  if (!Array.isArray(scripts) || !scripts.length || scripts.length > 8) fail('manifest needs one to eight content_scripts');
+  // A plugin may have no page scripts when it brings tools, an app page or a
+  // service (BoostPackage.read).
+  const yab = manifest.yab && typeof manifest.yab === 'object' ? manifest.yab : {};
+  const pageless = plugin && scripts === undefined && (Object.keys(yab.tools ?? {}).length > 0 || !!yab.app || !!yab.service);
+  if (!pageless && (!Array.isArray(scripts) || !scripts.length || scripts.length > 8)) fail('manifest needs one to eight content_scripts (or, for a plugin, tools, an app or a service)');
   for (const script of Array.isArray(scripts) ? scripts : []) {
     for (const key of Object.keys(script)) if (!SCRIPT_KEYS.has(key)) fail(`content_scripts key "${key}" is not supported`);
     if (script.all_frames !== undefined && script.all_frames !== false) fail('content scripts run in the main frame only');
@@ -125,10 +134,12 @@ export function validate(id, dir = BOOSTS) {
     if (!md.sites.length || md.sites.length > 8) fail('BOOST.md needs one to eight sites');
     for (const site of md.sites) if (!HOST_PATTERN.test(site) || site !== site.toLowerCase()) fail(`site ${site} must be an exact lowercase host`);
     const hosts = matchHosts(manifest);
-    if (canonical([...hosts].sort()) !== canonical([...md.sites].sort())) fail(`sites in BOOST.md (${md.sites.join(', ')}) differ from manifest matches (${hosts.join(', ')})`);
+    if (!pageless && canonical([...hosts].sort()) !== canonical([...md.sites].sort())) fail(`sites in BOOST.md (${md.sites.join(', ')}) differ from manifest matches (${hosts.join(', ')})`);
     if (!md.made) fail('BOOST.md needs made');
     if (!md.intent || md.intent.length > 8000) fail('BOOST.md needs the intent below the front matter, at most 8,000 characters');
-    if (!md.checks.length) fail('BOOST.md needs at least one check; the store lists only boosts with checks');
+    // Without page scripts there is no page to check; the catalog says so.
+    if (!md.checks.length && !pageless) fail('BOOST.md needs at least one check; the store lists only boosts with checks');
+    if (md.checks.length && pageless) fail('checks run on pages; a plugin without page scripts has none');
     if (md.checks.length > 30) fail('use at most 30 checks');
     if (md.checks.some(c => c.kind === 'script') && !files['checks.js']) fail('script checks need checks.js');
     if (!md.preview) fail('BOOST.md needs preview');
@@ -137,7 +148,7 @@ export function validate(id, dir = BOOSTS) {
         const url = new URL(md.preview);
         if (url.protocol !== 'https:') fail('preview must be https');
         if (!md.sites.includes(url.hostname)) fail(`preview host ${url.hostname} is not one of the sites`);
-        if (!(scripts ?? []).some(s => (s.matches ?? []).some(p => patternHost(p) && globMatch(p, md.preview)))) fail('preview is not matched by any content script');
+        if (!pageless && !(scripts ?? []).some(s => (s.matches ?? []).some(p => patternHost(p) && globMatch(p, md.preview)))) fail('preview is not matched by any content script');
       } catch { fail(`preview ${md.preview} is not a URL`); }
     }
   }
@@ -191,6 +202,27 @@ function pluginMetadata(manifest, md, files, fail) {
   for (const key of ['app', 'service']) {
     if (yab[key] !== undefined && (typeof yab[key] !== 'string' || !(yab[key] in files))) fail(`missing plugin file for yab.${key}`);
   }
+  if (typeof yab.app === 'string' && !(yab.app.startsWith('app/') && yab.app.endsWith('.html'))) fail('yab.app must be an HTML file inside app/');
+  if (yab.service !== undefined) {
+    const every = /^([1-9][0-9]*)(m|h|d)$/.exec(yab.every ?? '');
+    const seconds = every ? Number(every[1]) * { m: 60, h: 3600, d: 86400 }[every[2]] : 0;
+    if (!every || seconds < 900 || seconds > 604800) fail('a service needs yab.every from 15m to 7d, such as 30m, 1h or 1d');
+  } else if (yab.every !== undefined) fail('yab.every goes with a service');
+  if (yab.tools && typeof yab.tools === 'object' && !Array.isArray(yab.tools)) {
+    const TYPES = ['string', 'boolean', 'number', 'integer', 'object', 'array'];
+    for (const [name, tool] of Object.entries(yab.tools)) {
+      if (!/^[a-z][a-z0-9_]{0,47}$/.test(name)) fail(`tool name ${name} must be lowercase letters, digits and underscores`);
+      if (!tool || typeof tool !== 'object' || typeof tool.description !== 'string' || !tool.description || tool.description.length > 500) { fail(`tool ${name} needs a description of at most 500 characters`); continue; }
+      for (const key of Object.keys(tool)) if (!['description', 'params', 'acts'].includes(key)) fail(`tool ${name}: key "${key}" is not supported`);
+      const params = tool.params ?? null;
+      if (!params || typeof params !== 'object' || Object.keys(params).length > 20 || Object.values(params).some(t => typeof t !== 'string' || !TYPES.includes(t.replace(/\?$/, '')))) fail(`tool ${name}: params must map up to 20 names to ${TYPES.join(', ')} (? for optional)`);
+      if (tool.acts !== undefined && !['post', 'send', 'pay', 'delete', 'write'].includes(tool.acts)) fail(`tool ${name}: acts must be post, send, pay, delete or write`);
+    }
+    if (typeof files['tools.js'] === 'string') {
+      for (const name of Object.keys(yab.tools)) if (!new RegExp(`\\bexport\\s+(?:async\\s+)?function\\s+${name}\\b`).test(files['tools.js'])) fail(`tools.js does not export ${name}`);
+    }
+  }
+  if (typeof files['service.js'] === 'string' && yab.service === 'service.js' && !/\bexport\s+async\s+function\s+tick\b/.test(files['service.js'])) fail('service.js must export async function tick');
   if (yab.daily_limit !== undefined && !(Number.isInteger(yab.daily_limit) && yab.daily_limit >= 1 && yab.daily_limit <= 100)) fail('yab.daily_limit must be a whole number from 1 to 100');
   if (yab.hosts !== undefined) {
     const hosts = yab.hosts;

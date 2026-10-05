@@ -13,10 +13,10 @@
 // reaches only the plugin's sites (and yab.hosts), HTTPS, no cookies, no
 // redirects. Ticks stop at 25 s. Storage round-trips through JSON between
 // ticks and must stay under 64 KB. A `wake` counts only with yab:task, at most
-// 8,000 characters, and not when it repeats the previous wake. Yab's service
-// runs in a WKWebView whose origin is opaque, so a response without
-// Access-Control-Allow-Origin `*` or `null` is unreadable there: this script
-// warns about it, and refuses it with --strict-cors. A fixture answers one URL
+// 8,000 characters, and not when it repeats the previous wake. Yab makes the
+// service's requests itself (BoostServiceFetch), so CORS does not apply;
+// --strict-cors still refuses answers without Access-Control-Allow-Origin
+// `*` or `null`, as Yab builds before the store-code release did. A fixture answers one URL
 // from a local file on a given tick (or every tick), to stage a change.
 //
 // Tools (BoostTools.swift, BoostToolRuntime.swift): arguments are validated
@@ -120,7 +120,7 @@ function serviceFetch(tick, requests) {
     const body = await response.arrayBuffer();
     const cors = response.headers.get('access-control-allow-origin');
     const readable = cors === '*' || cors === 'null';
-    requests.push(`  ${method} ${target.href} -> ${response.status} ${size(body.byteLength)} ${Date.now() - started} ms` + (readable ? '' : `  CORS: no Access-Control-Allow-Origin for an opaque origin; Yab's service could not read this`));
+    requests.push(`  ${method} ${target.href} -> ${response.status} ${size(body.byteLength)} ${Date.now() - started} ms` + (readable || !options.strict ? '' : '  CORS: no Access-Control-Allow-Origin for an opaque origin'));
     if (response.status >= 300 && response.status < 400) throw new TypeError('Load failed: redirect refused (' + response.headers.get('location') + ')');
     if (!readable && options.strict) throw new TypeError('Load failed: CORS');
     return new Response(body, { status: response.status, headers: response.headers });

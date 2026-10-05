@@ -305,7 +305,14 @@ const withTimeout = (promise, ms) => Promise.race([promise, new Promise(r => set
 async function main() {
   const all = pluginIds();
   for (const id of args) if (!all.includes(id)) throw Error(`No such plugin: ${id}`);
-  const ids = args.length ? args : all;
+  // Plugins without page scripts (services, tools, app pages) have no page
+  // to try here: scripts/try-service.mjs tries them.
+  const pageless = id => !(readBoost(id, PLUGINS).manifest?.content_scripts ?? []).length;
+  const ids = (args.length ? args : all).filter(id => {
+    if (!pageless(id)) return true;
+    console.log(`skipped   ${id}: no page scripts; try it with scripts/try-service.mjs`);
+    return false;
+  });
   mkdirSync(OUT, { recursive: true });
   const file = join(OUT, 'results.json');
   const results = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : {};

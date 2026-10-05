@@ -87,10 +87,13 @@ function main() {
       unreviewed.push(id);
       if (!UNREVIEWED) continue;
     }
-    const result = results[id];
+    // A plugin without page scripts (a service, tools, an app page) has no
+    // page for the daily check; it is tried with scripts/try-service.mjs.
+    const pageless = boost.plugin && !(manifest.content_scripts ?? []).length;
+    const result = pageless ? { state: 'unchecked', at: null, note: 'no page to check' } : results[id];
 
     const record = history[id] ?? { days: {}, lastWorks: null };
-    if (result?.at) {
+    if (result?.at && !pageless) {
       record.days[result.at.slice(0, 10)] = result.state;
       if (result.state === 'works' && (!record.lastWorks || result.at > record.lastWorks)) record.lastWorks = result.at;
     }
@@ -132,7 +135,7 @@ function main() {
       sites: md.sites,
       host: listing.host ?? displayHost(md.sites[0]),
       rung,
-      rights: rightsOf(rung, md.sites.map(displayHost), hosts),
+      rights: rightsOf(rung, md.sites.map(displayHost), hosts, manifest, boost.files),
       ...(reviewed === undefined ? {} : { reviewed }),
       revision: envelope.revision,
       commit: versions.length ? versions[versions.length - 1].commit : null,
