@@ -57,7 +57,15 @@ function fixedOf(id, versions, folder = `boosts/${id}`) {
 function checkOf(id, result, record) {
   if (!result) return { state: 'unchecked', at: null, note: 'not checked yet' };
   if (result.state === 'works') return { state: 'works', at: result.at, note: null };
-  if (result.state === 'unchecked') return { state: 'unchecked', at: result.at, note: result.note ?? 'check could not run' };
+  if (result.state === 'unchecked') {
+    // try-plugin.mjs: a pass on a saved copy of a page that needs sign-in
+    // or blocks automated browsers. The Store shows the short reason.
+    if (result.saved) {
+      const why = /^needs sign-in/.test(result.note ?? '') ? 'needs sign-in' : 'blocked';
+      return { state: 'unchecked', at: result.at, note: `${why}; passes on a saved page` };
+    }
+    return { state: 'unchecked', at: result.at, note: result.note ?? 'check could not run' };
+  }
   // fails: count the checked days running that failed, today included.
   let running = 0;
   for (const day of Object.keys(record.days).sort().reverse()) {
