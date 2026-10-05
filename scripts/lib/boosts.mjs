@@ -145,7 +145,9 @@ export function rightsOf(rung, sites, hosts = [], manifest = null, files = {}) {
   const ai = permissions.includes('yab:task') || permissions.includes('yab:ask') || commands;
   const every = yab.service ? /^([1-9][0-9]*)(m|h|d)$/.exec(yab.every ?? '') : null;
   const minutes = every ? Number(every[1]) * { m: 1, h: 60, d: 1440 }[every[2]] : null;
-  return `Run code on ${names}. It can read and change these pages.`
+  // Tools, services and app pages alone never run inside the site's pages.
+  const scripts = Array.isArray(manifest?.content_scripts) && manifest.content_scripts.length > 0;
+  return (scripts ? `Run code on ${names}. It can read and change these pages.` : `Run code for ${names}, outside its pages.`)
     + (tools ? ` Adds ${tools} agent tools.` : '')
     + (can.length ? ` Can ${list(can)}.` : '')
     + (minutes ? ` Checks public data every ${minutes} minutes.` : '')
